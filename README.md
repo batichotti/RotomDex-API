@@ -13,8 +13,6 @@ ROTOMDEX ->
 
 **M**onsters
 
-**D**ata
+**D**ex
 
-**E**xchange &
-
-**X**perience
+**EX**
