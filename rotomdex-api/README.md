@@ -44,6 +44,23 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## Docker
+
+```bash
+# Build and start API + PostgreSQL
+$ docker compose up --build
+```
+
+The API will be available at `http://localhost:3001` and Swagger at `http://localhost:3001/swagger`.
+
+```bash
+# Stop containers
+$ docker compose down
+
+# Stop containers and remove database volume
+$ docker compose down -v
+```
+
 ## Run tests
 
 ```bash
