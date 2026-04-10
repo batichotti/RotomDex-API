@@ -1,0 +1,17 @@
+CREATE TABLE IF NOT EXISTS pokemon (
+	id INTEGER PRIMARY KEY,
+	numeral INTEGER NOT NULL,
+	name VARCHAR(100) NOT NULL,
+	species_id INTEGER NOT NULL,
+	primary_type VARCHAR(20) NOT NULL,
+	secondary_type VARCHAR(20),
+	hp SMALLINT NOT NULL,
+	attack SMALLINT NOT NULL,
+	defense SMALLINT NOT NULL,
+	special_attack SMALLINT NOT NULL,
+	special_defense SMALLINT NOT NULL,
+	speed SMALLINT NOT NULL,
+	height INTEGER NOT NULL,
+	weight INTEGER NOT NULL,
+	base_experience NUMERIC(6,1) NOT NULL
+);
