@@ -37,6 +37,9 @@ export class Pokemon {
 
   @Column({ type: 'smallint' })
   speed!: number;
+  
+  @Column({ type: 'smallint' })
+  bst!: number;
 
   @Column()
   height!: number;

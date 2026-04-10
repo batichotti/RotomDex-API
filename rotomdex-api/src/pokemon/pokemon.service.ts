@@ -30,11 +30,11 @@ export class PokemonService {
     });
   }
 
-  findFiltered(type: string, stat: keyof Pokemon, order: 'ASC' | 'DESC' = 'DESC') {
+  findFiltered(type: string, type2: string, stat: keyof Pokemon, order: 'ASC' | 'DESC' = 'DESC') {
     return this.pokemonRepository.find({
       where: [
-        { primary_type: ILike(type) },
-        { secondary_type: ILike(type) },
+        { primary_type: ILike(type), secondary_type: ILike(type2) },
+        { primary_type: ILike(type2), secondary_type: ILike(type) },
       ],
       order: {
         [stat]: order,

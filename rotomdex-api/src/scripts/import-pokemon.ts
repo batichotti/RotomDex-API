@@ -17,6 +17,7 @@ type PokemonCsvRow = {
   special_attack: string
   special_defense: string
   speed: string
+  bst: string
   height: string
   weight: string
   base_experience?: string
@@ -38,6 +39,7 @@ const PokemonSchema = new EntitySchema({
     special_attack: { type: Number },
     special_defense: { type: Number },
     speed: { type: Number },
+    bst: { type: Number },
     height: { type: Number },
     weight: { type: Number },
     base_experience: { type: Number }
@@ -83,6 +85,7 @@ async function run() {
       special_attack: Number(row.special_attack),
       special_defense: Number(row.special_defense),
       speed: Number(row.speed),
+      bst: Number(row.bst),
       height: Number(row.height),
       weight: Number(row.weight),
       base_experience: Number(row.base_experience)

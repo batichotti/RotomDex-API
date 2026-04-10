@@ -8,16 +8,18 @@ export class PokemonController {
     constructor(private readonly pokemonService: PokemonService) { }
 
     @Get()
-    @ApiQuery({ name: 'type', required: false, enum: ['water', 'fire', 'grass', 'bug', 'eletric', 'normal', 'fighting', 'flying', 'ice', 'rock', 'ground', 'poison', 'ghost', 'psychic', 'dark', 'steel', 'fairy', 'dragon', 'stellar'] })
-    @ApiQuery({ name: 'orderBy', required: false, enum: ['id', 'name', 'hp', 'attack', 'defense', 'special_attack', 'special_defense', 'speed'], default: 'id' })
     @ApiQuery({ name: 'order', required: false, enum: ['ASC', 'DESC'], default: 'DESC' })
+    @ApiQuery({ name: 'orderBy', required: false, enum: ['attack', 'bst', 'defense', 'height', 'hp', 'id', 'name', 'special_attack', 'special_defense', 'speed', 'weight'], default: 'id' })
+    @ApiQuery({ name: 'type', required: false, enum: ['bug', 'dark', 'dragon', 'eletric', 'fairy', 'fighting', 'fire', 'flying', 'ghost', 'grass', 'ground', 'ice', 'normal', 'poison', 'psychic', 'rock', 'steel', 'water'] })
+    @ApiQuery({ name: 'type2', required: false, enum: ['bug', 'dark', 'dragon', 'eletric', 'fairy', 'fighting', 'fire', 'flying', 'ghost', 'grass', 'ground', 'ice', 'normal', 'poison', 'psychic', 'rock', 'steel', 'water'] })
     findAll(
         @Query('type') type?: string,
+        @Query('type2') type2?: string,
         @Query('orderBy') orderBy: keyof Pokemon = 'id',
         @Query('order') order: 'ASC' | 'DESC' = 'DESC',
     ) {
         if (type) {
-            return this.pokemonService.findFiltered(type, orderBy, order);
+            return this.pokemonService.findFiltered(type, type2 || '', orderBy, order);
         }
         return this.pokemonService.findAll();
     }
@@ -27,6 +29,9 @@ export class PokemonController {
         const asNumber = Number(identifier);
 
         if (!isNaN(asNumber)) {
+            if (asNumber < 1 || asNumber > 1025) {
+                throw new Error('Pokemon ID must be between 1 and 1025');
+            }
             return this.pokemonService.findByDex(asNumber);
         }
 
