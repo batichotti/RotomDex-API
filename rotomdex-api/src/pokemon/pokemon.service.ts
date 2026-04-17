@@ -1,7 +1,7 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, ILike } from 'typeorm';
-import { Pokemon } from './pokemon.entity';
+import { Pokemon } from './entities/pokemon.entity';
 
 @Injectable()
 export class PokemonService {

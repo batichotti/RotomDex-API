@@ -1,8 +1,8 @@
 import { Controller, Get, Param, Query, BadRequestException, NotFoundException } from '@nestjs/common';
 import { ApiTags, ApiParam, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { PokemonService } from './pokemon.service';
-import { Pokemon } from './pokemon.entity';
-import { PokemonQueryDto } from './pokemon-query.dto';
+import { Pokemon } from './entities/pokemon.entity';
+import { PokemonQueryDto } from './dtos/pokemon-query.dto';
 
 @ApiTags('pokemon')
 @Controller('pokemon')
