@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, ILike } from 'typeorm';
 import { Pokemon } from './pokemon.entity';
@@ -30,12 +30,16 @@ export class PokemonService {
     });
   }
 
-  findFiltered(type: string, stat: keyof Pokemon, order: 'ASC' | 'DESC' = 'DESC') {
+  findFiltered( stat: keyof Pokemon, order: 'ASC' | 'DESC' = 'ASC', type: string, type2?: string ) {
+    const where = type2
+      ? [
+          { primary_type: ILike(type), secondary_type: ILike(type2) },
+          { primary_type: ILike(type2), secondary_type: ILike(type) },
+        ]
+      : { primary_type: ILike(type) };
+
     return this.pokemonRepository.find({
-      where: [
-        { primary_type: ILike(type) },
-        { secondary_type: ILike(type) },
-      ],
+      where,
       order: {
         [stat]: order,
       },

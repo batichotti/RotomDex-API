@@ -17,7 +17,7 @@ export class Pokemon {
   @Column( { length: 20 } )
   primary_type!: string;
 
-  @Column({ length: 20, nullable: true })
+  @Column( { length: 20 } )
   secondary_type?: string;
 
   @Column({ type: 'smallint' })
@@ -37,6 +37,9 @@ export class Pokemon {
 
   @Column({ type: 'smallint' })
   speed!: number;
+  
+  @Column({ type: 'smallint' })
+  bst!: number;
 
   @Column()
   height!: number;

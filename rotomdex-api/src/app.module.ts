@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { PokemonModule } from './pokemon/pokemon.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { MovesModule } from './moves/moves.module';
 
 @Module({
   imports: [
@@ -27,6 +28,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     }),
 
     PokemonModule,
+
+    MovesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS pokemon (
 	special_attack SMALLINT NOT NULL,
 	special_defense SMALLINT NOT NULL,
 	speed SMALLINT NOT NULL,
+	bst SMALLINT NOT NULL,
 	height INTEGER NOT NULL,
 	weight INTEGER NOT NULL,
 	base_experience NUMERIC(6,1) NOT NULL
