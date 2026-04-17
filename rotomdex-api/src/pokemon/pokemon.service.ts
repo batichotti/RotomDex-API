@@ -30,7 +30,7 @@ export class PokemonService {
     });
   }
 
-  findFiltered( stat: keyof Pokemon, order: 'ASC' | 'DESC' = 'DESC', type: string, type2?: string ) {
+  findFiltered( stat: keyof Pokemon, order: 'ASC' | 'DESC' = 'ASC', type: string, type2?: string ) {
     const where = type2
       ? [
           { primary_type: ILike(type), secondary_type: ILike(type2) },

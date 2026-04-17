@@ -20,8 +20,8 @@ export class PokemonQueryDto {
     @IsIn([...POKEMON_ATTRIBUTES], { message: `orderBy must be one of: ${POKEMON_ATTRIBUTES.join(', ')}` })
     orderBy?: string = 'id';
 
-    @ApiPropertyOptional({ enum: ['ASC', 'DESC'], default: 'DESC' })
+    @ApiPropertyOptional({ enum: ['ASC', 'DESC'], default: 'ASC' })
     @IsOptional()
     @IsEnum(['ASC', 'DESC'], { message: 'order must be ASC or DESC' })
-    order?: 'ASC' | 'DESC' = 'DESC';
+    order?: 'ASC' | 'DESC' = 'ASC';
 }
