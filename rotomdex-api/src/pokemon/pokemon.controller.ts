@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Query, BadRequestException, NotFoundException } from '@nestjs/common';
+import { Controller, Get, Param, Query, BadRequestException } from '@nestjs/common';
 import { ApiTags, ApiParam, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { PokemonService } from './pokemon.service';
 import { Pokemon } from './entities/pokemon.entity';
