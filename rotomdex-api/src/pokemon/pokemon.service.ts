@@ -30,19 +30,33 @@ export class PokemonService {
     });
   }
 
-  findFiltered( stat: keyof Pokemon, order: 'ASC' | 'DESC' = 'ASC', type: string, type2?: string ) {
-    const where = type2
-      ? [
-          { primary_type: ILike(type), secondary_type: ILike(type2) },
-          { primary_type: ILike(type2), secondary_type: ILike(type) },
-        ]
-      : { primary_type: ILike(type) };
+  findFiltered(stat: keyof Pokemon, order: 'ASC' | 'DESC' = 'ASC', type?: string, type2?: string) {
+    let where: any;
 
-    return this.pokemonRepository.find({
-      where,
-      order: {
-        [stat]: order,
-      },
-    });
+    if (type && type2) {
+      where = [
+        { primary_type: ILike(type), secondary_type: ILike(type2) },
+        { primary_type: ILike(type2), secondary_type: ILike(type) },
+      ];
+    } else if (type) {
+      where = [
+        { primary_type: ILike(type) }, { secondary_type: ILike(type) }
+      ];
+    }
+
+    if (type) {
+      return this.pokemonRepository.find({
+        where,
+        order: {
+          [stat]: order,
+        },
+      });
+    } else {
+      return this.pokemonRepository.find({
+        order: {
+          [stat]: order,
+        },
+      });
+    }
   }
 }
