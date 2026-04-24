@@ -1,16 +1,27 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { PokemonMovesService } from './pokemon-moves.service';
+import { ApiQuery } from '@nestjs/swagger';
 
 @Controller('pokemon-moves')
 export class PokemonMovesController {
   constructor(private readonly pokemonMovesService: PokemonMovesService) {}
   @Get()
-  findAll() {
-    return this.pokemonMovesService.findAll();
+  @ApiQuery({ name: 'page', required: false, type: Number })
+  @ApiQuery({ name: 'limit', required: false, type: Number })
+  findAll(
+    @Query('page') page?: string,
+    @Query('limit') limit?: string,
+  ) {
+    return this.pokemonMovesService.findAll(Number(page), Number(limit));
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.pokemonMovesService.findOne(+id);
+  @Get('/pokemon/:id')
+  findByPokemon(@Param('id') id: string) {
+    return this.pokemonMovesService.findByPokemon(+id);
+  }
+
+  @Get('/moves/:id')
+  findByMoves(@Param('id') id: string) {
+    return this.pokemonMovesService.findByMove(+id);
   }
 }
