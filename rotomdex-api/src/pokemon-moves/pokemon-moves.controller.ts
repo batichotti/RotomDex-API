@@ -4,13 +4,18 @@ import { PokemonMovesService } from './pokemon-moves.service';
 @Controller('pokemon-moves')
 export class PokemonMovesController {
   constructor(private readonly pokemonMovesService: PokemonMovesService) {}
-  @Get()
+  @Get('/moves/')
   findAll() {
     return this.pokemonMovesService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.pokemonMovesService.findOne(+id);
+  @Get('/pokemon/:id')
+  findByPokemon(@Param('id') id: string) {
+    return this.pokemonMovesService.findByPokemon(+id);
+  }
+
+  @Get('/moves/:id')
+  findByMoves(@Param('id') id: string) {
+    return this.pokemonMovesService.findByPokemon(+id);
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, ILike, Not, IsNull, MoreThanOrEqual, LessThanOrEqual, Between } from 'typeorm';
+import { Repository, ILike, Not, MoreThanOrEqual, LessThanOrEqual, Between } from 'typeorm';
 import { Moves } from './entities/moves.entity';
 
 @Injectable()

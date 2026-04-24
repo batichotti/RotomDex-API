@@ -1,9 +1,17 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { PokemonMoves } from './entities/pokemon-moves.entity';
 
 @Injectable()
 export class PokemonMovesService {
+  constructor (
+    @InjectRepository(PokemonMoves)
+    private pokemonMovesRepository: Repository<PokemonMoves>, 
+  ) {}
+
   findAll() {
-    return `This action returns all pokemonMoves`;
+    return this.pokemonMovesRepository.find();
   }
 
   findByPokemon(id: number) {

@@ -10,9 +10,6 @@ export class PokemonController {
     constructor(private readonly pokemonService: PokemonService) { }
 
     @Get()
-    @ApiOperation({ summary: 'List all pokemon with optional filters' })
-    @ApiResponse({ status: 200, description: 'Returns a list of pokemon' })
-    @ApiResponse({ status: 400, description: 'Invalid query parameters' })
     findAll(@Query() query: PokemonQueryDto) {
         const { type, type2, orderBy, order } = query;
 
@@ -28,11 +25,6 @@ export class PokemonController {
     }
 
     @Get(':identifier')
-    @ApiOperation({ summary: 'Find a pokemon by ID or name' })
-    @ApiParam({ name: 'identifier', description: 'Pokemon ID (1-1025) or name' })
-    @ApiResponse({ status: 200, description: 'Returns the pokemon' })
-    @ApiResponse({ status: 400, description: 'Invalid ID range' })
-    @ApiResponse({ status: 404, description: 'Pokemon not found' })
     findOne(@Param('identifier') identifier: string) {
         const asNumber = Number(identifier);
 
