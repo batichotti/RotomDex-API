@@ -48,20 +48,20 @@ export class MovesQueryDto {
     @Max(100, { message: 'accuracy must be at most 100' })
     accuracy?: number;
 
-    @ApiPropertyOptional({ minimum: 0, maximum: 100, type: Number })
+    @ApiPropertyOptional({ minimum: 0, maximum: 250, type: Number })
     @IsOptional()
     @Type(() => Number)
-    @IsInt({ message: 'accuracy must be an integer' })
-    @Min(0, { message: 'accuracy must be at least 0' })
-    @Max(250, { message: 'accuracy must be at most 250' })
+    @IsInt({ message: 'It must be an integer' })
+    @Min(0, { message: 'It must be at least 0' })
+    @Max(250, { message: 'It must be at most 250' })
     min?: number;
 
-    @ApiPropertyOptional({ minimum: 0, maximum: 100, type: Number })
+    @ApiPropertyOptional({ minimum: 0, maximum: 250, type: Number })
     @IsOptional()
     @Type(() => Number)
-    @IsInt({ message: 'accuracy must be an integer' })
-    @Min(0, { message: 'accuracy must be at least 0' })
-    @Max(250, { message: 'accuracy must be at most 250' })
+    @IsInt({ message: 'It must be an integer' })
+    @Min(0, { message: 'It must be at least 0' })
+    @Max(250, { message: 'It must be at most 250' })
     max?: number;
 
     @ApiPropertyOptional({ enum: MOVES_ATTRIBUTES_TO_FILL })
