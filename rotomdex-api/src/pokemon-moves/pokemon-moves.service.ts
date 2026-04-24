@@ -6,7 +6,11 @@ export class PokemonMovesService {
     return `This action returns all pokemonMoves`;
   }
 
-  findOne(id: number) {
+  findByPokemon(id: number) {
+    return `This action returns a #${id} pokemonMove`;
+  }
+
+  findByAbility(id: number) {
     return `This action returns a #${id} pokemonMove`;
   }
 }

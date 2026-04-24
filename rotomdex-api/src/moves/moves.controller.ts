@@ -16,5 +16,4 @@ export class MovesController {
   findByName(@Param('name') name: string) {
     return this.movesService.findByName(name);
   }
-  
 }
