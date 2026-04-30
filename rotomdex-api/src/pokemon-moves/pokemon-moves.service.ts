@@ -29,10 +29,28 @@ export class PokemonMovesService {
   }
 
   findByPokemon(id: number) {
-    return this.pokemonMovesRepository.findBy({ pokemon_id: id });
+      return this.pokemonMovesRepository
+        .createQueryBuilder('pokemon_move')
+        .leftJoinAndMapOne(
+          'pokemon_move.move',
+          'moves',
+          'move',
+          'move.id = pokemon_move.move_id',
+        )
+        .where('pokemon_move.pokemon_id = :id', { id })
+        .getMany();
   }
 
   findByMove(id: number) {
-    return this.pokemonMovesRepository.findBy({ move_id: id });
+    return this.pokemonMovesRepository
+        .createQueryBuilder('pokemon_move')
+        .leftJoinAndMapOne(
+          'pokemon_move.pokemon',
+          'pokemon',
+          'pokemon',
+          'pokemon.id = pokemon_move.pokemon_id',
+        )
+        .where('pokemon_move.move_id = :id', { id })
+        .getMany();
   }
 }

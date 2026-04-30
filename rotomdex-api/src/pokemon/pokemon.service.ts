@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, ILike, MoreThanOrEqual, LessThanOrEqual, Between } from 'typeorm';
+import { Brackets, ILike, Repository } from 'typeorm';
 import { Pokemon } from './entities/pokemon.entity';
 
 @Injectable()
@@ -31,43 +31,40 @@ export class PokemonService {
   }
 
   findFiltered(orderBy: keyof Pokemon = 'id', order: 'ASC' | 'DESC' = 'ASC', type?: string, type2?: string, min?: number, max?: number, fill?: string) {
-    let where: any = {};
+    const query = this.pokemonRepository
+      .createQueryBuilder('pokemon')
+      .orderBy(`pokemon.${String(orderBy)}`, order);
 
     if (fill) {
-          if (min !== undefined && max !== undefined) {
-            where[fill] = Between(min, max);
-          } else if (min !== undefined) {
-            where[fill] = MoreThanOrEqual(min);
-          } else if (max !== undefined) {
-            where[fill] = LessThanOrEqual(max);
-          }
-        }
+      if (min !== undefined && max !== undefined) {
+        query.andWhere(`pokemon.${fill} BETWEEN :min AND :max`, { min, max });
+      } else if (min !== undefined) {
+        query.andWhere(`pokemon.${fill} >= :min`, { min });
+      } else if (max !== undefined) {
+        query.andWhere(`pokemon.${fill} <= :max`, { max });
+      }
+    }
 
     if (type && type2) {
-      where = [
-        { primary_type: ILike(type), secondary_type: ILike(type2) },
-        { primary_type: ILike(type2), secondary_type: ILike(type) },
-      ];
+      query.andWhere(
+        new Brackets((qb) => {
+          qb.where(
+            '(pokemon.primary_type ILIKE :type AND pokemon.secondary_type ILIKE :type2)',
+            { type, type2 },
+          ).orWhere(
+            '(pokemon.primary_type ILIKE :type2 AND pokemon.secondary_type ILIKE :type)',
+            { type, type2 },
+          );
+        }),
+      );
     } else if (type) {
-      where = [
-        { primary_type: ILike(type) }, { secondary_type: ILike(type) }
-      ];
+      query.andWhere(
+        new Brackets((qb) => {
+          qb.where('pokemon.primary_type ILIKE :type', { type }).orWhere('pokemon.secondary_type ILIKE :type', { type });
+        }),
+      );
     }
 
-    if (type) {
-      return this.pokemonRepository.find({
-        where,
-        order: {
-          [orderBy]: order,
-        },
-      });
-    } else {
-      return this.pokemonRepository.find({
-        where,
-        order: {
-          [orderBy]: order,
-        },
-      });
-    }
+    return query.getMany();
   }
 }
