@@ -1,5 +1,5 @@
 import { Controller, Get, Param, Query, BadRequestException } from '@nestjs/common';
-import { ApiTags, ApiParam, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 import { PokemonService } from './pokemon.service';
 import { Pokemon } from './entities/pokemon.entity';
 import { PokemonQueryDto } from './dtos/pokemon-query.dto';
@@ -11,17 +11,13 @@ export class PokemonController {
 
     @Get()
     findAll(@Query() query: PokemonQueryDto) {
-        const { type, type2, orderBy, order } = query;
+        const { type, type2, min, max, fill, orderBy, order } = query;
 
         if (type2 && !type) {
             throw new BadRequestException('Type 2 cannot be used without Type 1');
         }
 
-        if (type) {
-            return this.pokemonService.findFiltered( orderBy as keyof Pokemon, order, type, type2 || '' );
-        }
-
-        return this.pokemonService.findAll();
+        return this.pokemonService.findFiltered( orderBy as keyof Pokemon, order, type, type2 || '', min, max, fill);
     }
 
     @Get(':identifier')

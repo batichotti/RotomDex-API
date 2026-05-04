@@ -1,6 +1,6 @@
-import { Injectable, BadRequestException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, ILike } from 'typeorm';
+import { Brackets, ILike, Repository } from 'typeorm';
 import { Pokemon } from './entities/pokemon.entity';
 
 @Injectable()
@@ -30,33 +30,41 @@ export class PokemonService {
     });
   }
 
-  findFiltered(stat: keyof Pokemon, order: 'ASC' | 'DESC' = 'ASC', type?: string, type2?: string) {
-    let where: any;
+  findFiltered(orderBy: keyof Pokemon = 'id', order: 'ASC' | 'DESC' = 'ASC', type?: string, type2?: string, min?: number, max?: number, fill?: string) {
+    const query = this.pokemonRepository
+      .createQueryBuilder('pokemon')
+      .orderBy(`pokemon.${String(orderBy)}`, order);
+
+    if (fill) {
+      if (min !== undefined && max !== undefined) {
+        query.andWhere(`pokemon.${fill} BETWEEN :min AND :max`, { min, max });
+      } else if (min !== undefined) {
+        query.andWhere(`pokemon.${fill} >= :min`, { min });
+      } else if (max !== undefined) {
+        query.andWhere(`pokemon.${fill} <= :max`, { max });
+      }
+    }
 
     if (type && type2) {
-      where = [
-        { primary_type: ILike(type), secondary_type: ILike(type2) },
-        { primary_type: ILike(type2), secondary_type: ILike(type) },
-      ];
+      query.andWhere(
+        new Brackets((qb) => {
+          qb.where(
+            '(pokemon.primary_type ILIKE :type AND pokemon.secondary_type ILIKE :type2)',
+            { type, type2 },
+          ).orWhere(
+            '(pokemon.primary_type ILIKE :type2 AND pokemon.secondary_type ILIKE :type)',
+            { type, type2 },
+          );
+        }),
+      );
     } else if (type) {
-      where = [
-        { primary_type: ILike(type) }, { secondary_type: ILike(type) }
-      ];
+      query.andWhere(
+        new Brackets((qb) => {
+          qb.where('pokemon.primary_type ILIKE :type', { type }).orWhere('pokemon.secondary_type ILIKE :type', { type });
+        }),
+      );
     }
 
-    if (type) {
-      return this.pokemonRepository.find({
-        where,
-        order: {
-          [stat]: order,
-        },
-      });
-    } else {
-      return this.pokemonRepository.find({
-        order: {
-          [stat]: order,
-        },
-      });
-    }
+    return query.getMany();
   }
 }
