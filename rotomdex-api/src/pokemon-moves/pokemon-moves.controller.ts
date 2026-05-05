@@ -1,6 +1,8 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { PokemonMovesService } from './pokemon-moves.service';
 import { ApiQuery } from '@nestjs/swagger';
+import { PokemonMovesDto } from './dto/pokemon-moves-query.dto';
+import { MovesPokemonDto } from './dto/moves-pokemon-query.dto ';
 
 @Controller('pokemon-moves')
 export class PokemonMovesController {
@@ -16,12 +18,12 @@ export class PokemonMovesController {
   }
 
   @Get('/pokemon/:id')
-  findByPokemon(@Param('id') id: string) {
+  findByPokemon(@Param('id') id: string, @Query() query: PokemonMovesDto) {
     return this.pokemonMovesService.findByPokemon(+id);
   }
 
   @Get('/moves/:id')
-  findByMoves(@Param('id') id: string) {
+  findByMoves(@Param('id') id: string, @Query() query: MovesPokemonDto) {
     return this.pokemonMovesService.findByMove(+id);
   }
 }
