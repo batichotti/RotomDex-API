@@ -43,14 +43,14 @@ export class PokemonMovesService {
 
   findByMove(id: number) {
     return this.pokemonMovesRepository
-        .createQueryBuilder('pokemon_move')
-        .leftJoinAndMapOne(
+      .createQueryBuilder('pokemon_move')
+      .leftJoinAndMapOne(
           'pokemon_move.pokemon',
           'pokemon',
           'pokemon',
           'pokemon.id = pokemon_move.pokemon_id',
         )
-        .where('pokemon_move.move_id = :id', { id })
-        .getMany();
+      .where('pokemon_move.move_id = :id', { id })
+      .getMany();
   }
 }

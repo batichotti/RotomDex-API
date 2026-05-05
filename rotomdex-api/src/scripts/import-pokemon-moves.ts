@@ -92,10 +92,10 @@ async function run() {
     const lotes = chunk(pokemonMoves, 500)
 
     for (const lote of lotes) {
-      await pokemonMoveRepository.upsert(lote, {
-        conflictPaths: ['pokemon_id', 'move_id'],
-        skipUpdateIfNoValuesChanged: true
-      })
+      // Use save instead of upsert because the DB doesn't have a unique
+      // constraint matching the ON CONFLICT target (composite key). save()
+      // will perform proper insert/update based on entity primary columns.
+      await pokemonMoveRepository.save(lote)
     }
 
     console.log(`✅ Importação de movimentos concluída! (${pokemonMoves.length} registros)`)
