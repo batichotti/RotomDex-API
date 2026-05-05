@@ -19,11 +19,13 @@ export class PokemonMovesController {
 
   @Get('/pokemon/:id')
   findByPokemon(@Param('id') id: string, @Query() query: PokemonMovesDto) {
-    return this.pokemonMovesService.findByPokemon(+id);
+    const {learn_method, type, power, pp, effect_chance, accuracy, min, max, fill, damage_class, category, generation, orderBy, order} = query;
+    return this.pokemonMovesService.findByPokemon(id, orderBy || 'name', order || 'ASC', learn_method, type, power, pp, effect_chance, accuracy, min, max, fill, damage_class, category, generation);
   }
 
   @Get('/moves/:id')
   findByMoves(@Param('id') id: string, @Query() query: MovesPokemonDto) {
-    return this.pokemonMovesService.findByMove(+id);
+    const {learn_method, type, type2, min, max, fill, orderBy, order} = query;
+    return this.pokemonMovesService.findByMove(id, orderBy || 'id', order || 'ASC', learn_method, type, type2, min, max, fill);
   }
 }

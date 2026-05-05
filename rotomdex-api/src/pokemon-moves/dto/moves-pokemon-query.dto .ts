@@ -50,5 +50,5 @@ export class MovesPokemonDto{
     @ApiPropertyOptional({ enum: ['ASC', 'DESC'], default: 'ASC' })
     @IsOptional()
     @IsEnum(['ASC', 'DESC'], { message: 'order must be ASC or DESC' })
-    order?: 'ASC' | 'DESC' = 'ASC';
+    order?: string;
 }
