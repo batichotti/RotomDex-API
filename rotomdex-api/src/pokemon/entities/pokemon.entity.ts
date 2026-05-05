@@ -5,9 +5,6 @@ export class Pokemon {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column()
-  numeral!: number;
-
   @Column({ length: 100 })
   name!: string;
 
@@ -44,7 +41,7 @@ export class Pokemon {
   @Column()
   height!: number;
 
-  @Column()
+  @Column({ type: 'float' })
   weight!: number;
 
   @Column({ type: 'numeric', precision: 6, scale: 1, nullable: true })

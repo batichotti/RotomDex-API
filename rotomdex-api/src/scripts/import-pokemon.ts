@@ -6,7 +6,6 @@ import { DataSource, EntitySchema } from 'typeorm'
 
 type PokemonCsvRow = {
   id: string
-  numeral: string
   name: string
   species_id: string
   primary_type: string
@@ -28,7 +27,6 @@ const PokemonSchema = new EntitySchema({
   tableName: 'pokemon',
   columns: {
     id: { type: Number, primary: true },
-    numeral: { type: Number },
     name: { type: String },
     species_id: { type: Number },
     primary_type: { type: String },
@@ -40,7 +38,7 @@ const PokemonSchema = new EntitySchema({
     special_defense: { type: Number },
     speed: { type: Number },
     bst: { type: Number },
-    height: { type: Number },
+    height: { type: 'float' },
     weight: { type: Number },
     base_experience: { type: Number }
   }
@@ -74,7 +72,6 @@ async function run() {
 
     const pokemons = dadosCsv.map((row) => ({
       id: Number(row.id),
-      numeral: Number(row.numeral),
       name: row.name,
       species_id: Number(row.species_id),
       primary_type: row.primary_type,
