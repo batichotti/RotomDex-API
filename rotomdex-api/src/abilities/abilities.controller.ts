@@ -1,7 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { AbilitiesService } from './abilities.service';
-import { CreateAbilityDto } from './dto/create-ability.dto';
-import { UpdateAbilityDto } from './dto/update-ability.dto';
 
 @Controller('abilities')
 export class AbilitiesController {

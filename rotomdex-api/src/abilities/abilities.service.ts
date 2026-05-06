@@ -1,14 +1,20 @@
 import { Injectable } from '@nestjs/common';
-import { CreateAbilityDto } from './dto/create-ability.dto';
-import { UpdateAbilityDto } from './dto/update-ability.dto';
-
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Abilities } from './entities/ability.entity';
 @Injectable()
 export class AbilitiesService {
+  constructor(
+      @InjectRepository(Abilities)
+      private abilitiesRepository: Repository<Abilities>,
+    ) {}
+
+
   findAll() {
-    return `This action returns all abilities`;
+    return this.abilitiesRepository.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} ability`;
+    return this.abilitiesRepository.findOneBy({ id });
   }
 }
