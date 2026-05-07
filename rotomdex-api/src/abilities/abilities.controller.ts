@@ -1,19 +1,20 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { AbilitiesService } from './abilities.service';
-import { CreateAbilityDto } from './dto/create-ability.dto';
-import { UpdateAbilityDto } from './dto/update-ability.dto';
+import { AbilitiesQueryDto } from './dto/abilities-query.dto';
 
 @Controller('abilities')
 export class AbilitiesController {
   constructor(private readonly abilitiesService: AbilitiesService) {}
 
   @Get()
-  findAll() {
-    return this.abilitiesService.findAll();
+  findAll(@Query() query: AbilitiesQueryDto) {
+    const {generation_min, generation, generation_max} = query;
+    if(!(generation_min || generation || generation_max)) return this.abilitiesService.findAll();
+    else return this.abilitiesService.findFiltered(generation_min!, generation!, generation_max!);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.abilitiesService.findOne(+id);
+  @Get(':name')
+  findOne(@Param('name') name: string) {
+    return this.abilitiesService.findOne(name);
   }
 }
