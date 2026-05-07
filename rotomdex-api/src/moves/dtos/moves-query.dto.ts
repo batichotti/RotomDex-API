@@ -66,7 +66,7 @@ export class MovesQueryDto {
 
     @ApiPropertyOptional({ enum: MOVES_ATTRIBUTES_TO_FILL })
     @IsOptional()
-    @IsIn([...MOVES_ATTRIBUTES_TO_FILL], {message: `damage_class must be one of ${MOVES_ATTRIBUTES_TO_FILL.join(', ')}`})
+    @IsIn([...MOVES_ATTRIBUTES_TO_FILL], {message: `fill must be one of ${MOVES_ATTRIBUTES_TO_FILL.join(', ')}`})
     fill?: string;
 
     @ApiPropertyOptional({ enum: MOVES_DAMAGE_CLASS })
@@ -76,12 +76,12 @@ export class MovesQueryDto {
 
     @ApiPropertyOptional({ enum: MOVES_CATEGORY })
     @IsOptional()
-    @IsIn([...MOVES_CATEGORY], {message: `damage_class must be one of ${MOVES_CATEGORY.join(', ')}`})
+    @IsIn([...MOVES_CATEGORY], {message: `category must be one of ${MOVES_CATEGORY.join(', ')}`})
     category?: string;
 
     @ApiPropertyOptional({ enum: MOVES_GENERATION })
     @IsOptional()
-    @IsIn([...MOVES_GENERATION], {message: `damage_class must be one of ${MOVES_GENERATION.join(', ')}`})
+    @IsIn([...MOVES_GENERATION], {message: `generation must be one of ${MOVES_GENERATION.join(', ')}`})
     generation?: string;
 
     @ApiPropertyOptional({ enum: MOVES_ATTRIBUTES, default: 'name' })
