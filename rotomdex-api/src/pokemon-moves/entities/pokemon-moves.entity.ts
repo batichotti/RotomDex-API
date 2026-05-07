@@ -5,10 +5,10 @@ export class PokemonMoves {
 	@PrimaryColumn()
 	pokemon_id!: number;
 
-	@PrimaryColumn()
+	@Column()
 	pokemon_name!: string;
 
-	@PrimaryColumn()
+	@Column()
 	move_name!: string;
 
 	@PrimaryColumn()
