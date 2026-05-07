@@ -98,7 +98,7 @@ async function run() {
       await pokemonMoveRepository.save(lote)
     }
 
-    console.log(`✅ Importação de movimentos concluída! (${pokemonMoves.length} registros)`)
+    console.log(`✅ Importação da relação pokemon-movimentos concluída! (${pokemonMoves.length} registros)`)
   } catch (error) {
     console.error('❌ Erro durante importação:', error)
   } finally {

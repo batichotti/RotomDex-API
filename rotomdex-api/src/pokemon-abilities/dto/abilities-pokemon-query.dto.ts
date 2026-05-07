@@ -5,13 +5,10 @@ import { Type } from 'class-transformer';
 const POKEMON_TYPES = ['bug', 'dark', 'dragon', 'electric', 'fairy', 'fighting', 'fire', 'flying', 'ghost', 'grass', 'ground', 'ice', 'normal', 'poison', 'psychic', 'rock', 'steel', 'water'] as const;
 const POKEMON_ATTRIBUTES = ['attack', 'bst', 'defense', 'hp', 'id', 'name', 'special_attack', 'special_defense', 'speed', 'height', 'weight'] as const;
 const POKEMON_ATTRIBUTES_TO_FILL = ['attack', 'bst', 'defense', 'hp', 'id', 'special_attack', 'special_defense', 'speed', 'height', 'weight'] as const;
-const LEARN_METHOD = ['level-up', 'egg', 'machine', 'tutor']
 
-export class MovesPokemonDto{
-    @ApiPropertyOptional({ enum: LEARN_METHOD})
+export class AbilitiesPokemonDto{
     @IsOptional()
-    @IsIn([...LEARN_METHOD], { message: `Learn Method must be one of: ${LEARN_METHOD.join(', ')}`})
-    learn_method?: string;
+    is_hidden?: boolean;
 
     @ApiPropertyOptional({ enum: POKEMON_TYPES })
     @IsOptional()

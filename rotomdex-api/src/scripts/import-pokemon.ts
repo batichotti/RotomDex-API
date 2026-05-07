@@ -90,7 +90,7 @@ async function run() {
 
     await pokemonRepository.save(pokemons)
 
-    console.log('✅ Importação concluída com sucesso!')
+    console.log('✅ Importação de pokemon concluída!')
   } catch (error) {
     console.error('❌ Erro durante importação:', error)
   } finally {

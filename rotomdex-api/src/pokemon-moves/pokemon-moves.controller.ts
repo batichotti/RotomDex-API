@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { PokemonMovesService } from './pokemon-moves.service';
 import { ApiQuery } from '@nestjs/swagger';
 import { PokemonMovesDto } from './dto/pokemon-moves-query.dto';
@@ -10,10 +10,7 @@ export class PokemonMovesController {
   @Get()
   @ApiQuery({ name: 'page', required: false, type: Number })
   @ApiQuery({ name: 'limit', required: false, type: Number })
-  findAll(
-    @Query('page') page?: string,
-    @Query('limit') limit?: string,
-  ) {
+  findAll(@Query('page') page?: string, @Query('limit') limit?: string) {
     return this.pokemonMovesService.findAll(Number(page), Number(limit));
   }
 

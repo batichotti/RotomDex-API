@@ -60,7 +60,7 @@ async function run() {
 
     await abilitiesRepository.save(abilities)
 
-    console.log('✅ Importação concluída com sucesso!')
+    console.log('✅ Importação de habilidades concluída!')
   } catch (error) {
     console.error('❌ Erro durante importação:', error)
   } finally {
