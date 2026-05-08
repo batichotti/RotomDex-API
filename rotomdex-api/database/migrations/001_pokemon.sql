@@ -1,6 +1,7 @@
-CREATE TABLE IF NOT EXISTS pokemon (
+DROP TABLE IF EXISTS pokemon;
+
+CREATE TABLE pokemon (
 	id INTEGER PRIMARY KEY,
-	numeral INTEGER NOT NULL,
 	name VARCHAR(100) NOT NULL,
 	species_id INTEGER NOT NULL,
 	primary_type VARCHAR(20) NOT NULL,
@@ -13,6 +14,6 @@ CREATE TABLE IF NOT EXISTS pokemon (
 	speed SMALLINT NOT NULL,
 	bst SMALLINT NOT NULL,
 	height INTEGER NOT NULL,
-	weight INTEGER NOT NULL,
+	weight FLOAT NOT NULL,
 	base_experience NUMERIC(6,1) NOT NULL
 );

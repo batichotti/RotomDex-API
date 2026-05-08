@@ -84,7 +84,7 @@ async function run() {
 
     await movesRepository.save(moves)
 
-    console.log('✅ Importação concluída com sucesso!')
+    console.log('✅ Importação de movimentos concluída!')
   } catch (error) {
     console.error('❌ Erro durante importação:', error)
   } finally {
