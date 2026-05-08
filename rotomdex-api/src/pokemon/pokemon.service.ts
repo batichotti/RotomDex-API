@@ -26,7 +26,7 @@ export class PokemonService {
 
   findByName(name: string) {
     return this.pokemonRepository.findBy({
-      name: ILike(name),
+      name: ILike(`%${name}%`),
     });
   }
 
