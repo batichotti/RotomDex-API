@@ -23,7 +23,7 @@ def get_pokemon_data(pokemon_url):
     species_response = requests.get(species_url)
     species_response.raise_for_status()
     species_data = species_response.json()
-    
+
     primary_type = data["types"][0]["type"]["name"] if data["types"] else ""
     secondary_type = data["types"][1]["type"]["name"] if len(data["types"]) > 1 else "None"
     
@@ -39,9 +39,51 @@ def get_pokemon_data(pokemon_url):
     weight = data["weight"]/10
     base_experience = data["base_experience"] if data["base_experience"] else 0
     species_id = species_data["id"]
-    # Use the species identifier for the Pokédex numeral so alternate forms
-    # like Mega evolutions keep the same entry number as their base species.    
-    return [pokemon_id, pokemon_name, species_id, primary_type, secondary_type, hp, attack, defense, special_attack, special_defense, speed, bst, height, weight, base_experience]
+    species_name = species_data["name"]
+    variety_name = data["name"]
+    generation = species_data["generation"]["name"] if species_data.get("generation") else ""
+    is_legendary = species_data.get("is_legendary", False)
+    is_mythical = species_data.get("is_mythical", False)
+    is_baby = species_data.get("is_baby", False)
+    has_gender_differences = species_data.get("has_gender_differences", False)
+    forms_switchable = species_data.get("forms_switchable", False)
+    is_mega = "mega" in variety_name
+    is_gmax = "gmax" in variety_name or "gigantamax" in variety_name
+    is_regional_form = any(region in variety_name for region in ["alola", "galar", "hisui", "paldea"])
+
+    egg_groups = species_data.get("egg_groups", [])
+    egg_group_1 = egg_groups[0]["name"] if len(egg_groups) > 0 else "None"
+    egg_group_2 = egg_groups[1]["name"] if len(egg_groups) > 1 else "None"
+
+    return [
+        pokemon_id,
+        pokemon_name,
+        species_id,
+        species_name,
+        generation,
+        is_legendary,
+        is_mythical,
+        is_baby,
+        has_gender_differences,
+        forms_switchable,
+        is_mega,
+        is_gmax,
+        is_regional_form,
+        egg_group_1,
+        egg_group_2,
+        primary_type,
+        secondary_type,
+        hp,
+        attack,
+        defense,
+        special_attack,
+        special_defense,
+        speed,
+        bst,
+        height,
+        weight,
+        base_experience,
+    ]
 
 def build_rows():
     rows = []
@@ -68,7 +110,35 @@ def save_csv(rows, filename="pokemon.csv"):
 
     with open(filepath, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
-        writer.writerow(["id", "name", "species_id", "primary_type", "secondary_type", "hp", "attack", "defense", "special_attack", "special_defense", "speed", "bst", "height", "weight", "base_experience"])
+        writer.writerow([
+            "id",
+            "name",
+            "species_id",
+            "species_name",
+            "generation",
+            "is_legendary",
+            "is_mythical",
+            "is_baby",
+            "has_gender_differences",
+            "forms_switchable",
+            "is_mega",
+            "is_gmax",
+            "is_regional_form",
+            "egg_group_1",
+            "egg_group_2",
+            "primary_type",
+            "secondary_type",
+            "hp",
+            "attack",
+            "defense",
+            "special_attack",
+            "special_defense",
+            "speed",
+            "bst",
+            "height",
+            "weight",
+            "base_experience",
+        ])
         writer.writerows(rows)
 
     print(f"\nCSV salvo em: {filepath}")
