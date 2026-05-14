@@ -1,7 +1,7 @@
-import requests
-import time
-import csv
 import os
+import time
+
+import requests
 
 BASE_URL = "https://pokeapi.co/api/v2"
 
@@ -99,25 +99,54 @@ def build_rows():
 
     return rows
 
-def save_csv(rows, filename="moves_pokemon.csv"):
+
+def format_sql_value(value):
+    if value is None:
+        return "NULL"
+    if isinstance(value, bool):
+        return "TRUE" if value else "FALSE"
+    if isinstance(value, str):
+        escaped = value.replace("'", "''")
+        return f"'{escaped}'"
+    return str(value)
+
+
+def save_sql(rows, filename="006_pokemon_moves.sql"):
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    filepath = os.path.join(script_dir, filename)
+    migrations_dir = os.path.abspath(os.path.join(script_dir, "..", "migrations"))
+    filepath = os.path.join(migrations_dir, filename)
 
-    with open(filepath, "w", newline="", encoding="utf-8") as f:
-        writer = csv.writer(f)
-        writer.writerow([
-            "pokemon_id",
-            "pokemon_name",
-            "move_name",
-            "move_id",
-            "level_learned_at",
-            "move_learn_method",
-            "most_recent_game_learned_in",
-        ])
-        writer.writerows(rows)
+    os.makedirs(migrations_dir, exist_ok=True)
 
-    print(f"\nCSV salvo em: {filepath}")
+    create_table_sql = """DROP TABLE IF EXISTS pokemon_moves;
+
+CREATE TABLE pokemon_moves (
+    pokemon_id INTEGER NOT NULL,
+    pokemon_name VARCHAR NOT NULL,
+    move_name VARCHAR NOT NULL,
+    move_id INTEGER NOT NULL,
+    level_learned_at INTEGER,
+    move_learn_method VARCHAR NOT NULL,
+    most_recent_game_learned_in VARCHAR NOT NULL,
+    PRIMARY KEY (pokemon_id, move_id),
+    FOREIGN KEY (pokemon_id) REFERENCES pokemon(id),
+    FOREIGN KEY (move_id) REFERENCES moves(id)
+);
+"""
+
+    insert_statements = []
+    for row in rows:
+        values = ", ".join(format_sql_value(value) for value in row)
+        insert_statements.append(f"INSERT INTO pokemon_moves VALUES ({values});")
+
+    with open(filepath, "w", encoding="utf-8", newline="") as f:
+        f.write(create_table_sql)
+        f.write("\n")
+        f.write("\n".join(insert_statements))
+        f.write("\n")
+
+    print(f"\nSQL salvo em: {filepath}")
 
 if __name__ == "__main__":
     rows = build_rows()
-    save_csv(rows)
+    save_sql(rows)
