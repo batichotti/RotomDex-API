@@ -16,7 +16,7 @@ export class MovesQueryDto {
     @IsIn([...MOVES_TYPES], { message: `type must be one of: ${MOVES_TYPES.join(', ')}` })
     type?: string;
     
-    @ApiPropertyOptional({ minimum: 0, maximum: 100, type: Number })
+    @ApiPropertyOptional({ minimum: 0, maximum: 250, type: Number })
     @IsOptional()
     @Type(() => Number)
     @IsInt({ message: 'power must be an integer' })

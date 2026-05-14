@@ -26,7 +26,7 @@ import { PokemonAbilitiesModule } from './pokemon-abilities/pokemon-abilities.mo
         password: config.get<string>('DATABASE_PASSWORD'),
         database: config.get<string>('DATABASE_NAME'),
         autoLoadEntities: true,
-        synchronize: true, // só em produção
+        synchronize: false, // só em produção
       }),
     }),
 
