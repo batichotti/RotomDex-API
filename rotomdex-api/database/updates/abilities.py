@@ -1,4 +1,4 @@
-import csv
+import json
 import os
 import time
 
@@ -63,22 +63,6 @@ def build_rows():
 	pokemon_has_abilities_rows = []
 	ability_list = get_all_abilities()
 
-	# Load local pokemon CSV to map names to ids
-	script_dir = os.path.dirname(os.path.abspath(__file__))
-	pokemon_csv_path = os.path.join(script_dir, "pokemon.csv")
-	pokemon_name_to_id = {}
-	if os.path.exists(pokemon_csv_path):
-		try:
-			with open(pokemon_csv_path, newline="", encoding="utf-8") as pcsv:
-				reader = csv.DictReader(pcsv)
-				for row in reader:
-					name = row.get("name")
-					pid = row.get("id")
-					if name and pid:
-						pokemon_name_to_id[name] = int(pid)
-		except Exception:
-			pass
-
 	for i, ability in enumerate(ability_list):
 		url = ability["url"]
 
@@ -99,10 +83,7 @@ def build_rows():
 			for entry in pokemon_entries:
 				pokemon = entry.get("pokemon", {})
 				pokemon_name = pokemon.get("name", "")
-				# prefer id from local csv mapping, fallback to any pokemon_id in entry
-				pokemon_id = pokemon_name_to_id.get(pokemon_name) if pokemon_name else None
-				if pokemon_id is None:
-					pokemon_id = entry.get("pokemon_id")
+				pokemon_id = entry.get("pokemon_id")
 
 				pokemon_has_abilities_rows.append([
 					pokemon_id,
@@ -122,41 +103,74 @@ def build_rows():
 	return abilities_rows, pokemon_has_abilities_rows
 
 
-def save_csv(rows, filename, headers):
+def format_sql_value(value):
+	if value is None:
+		return "NULL"
+	if isinstance(value, bool):
+		return "TRUE" if value else "FALSE"
+	if isinstance(value, (list, dict, tuple)):
+		value = json.dumps(value, ensure_ascii=False)
+	if isinstance(value, str):
+		escaped = value.replace("'", "''")
+		return f"'{escaped}'"
+	return str(value)
+
+
+def save_sql(rows, filename, table_name, create_table_sql):
 	script_dir = os.path.dirname(os.path.abspath(__file__))
-	filepath = os.path.join(script_dir, filename)
+	migrations_dir = os.path.abspath(os.path.join(script_dir, "..", "migrations"))
+	filepath = os.path.join(migrations_dir, filename)
 
-	with open(filepath, "w", newline="", encoding="utf-8") as f:
-		writer = csv.writer(f)
-		writer.writerow(headers)
-		writer.writerows(rows)
+	os.makedirs(migrations_dir, exist_ok=True)
 
-	print(f"\nCSV salvo em: {filepath}")
+	insert_statements = []
+	for row in rows:
+		values = ", ".join(format_sql_value(value) for value in row)
+		insert_statements.append(f"INSERT INTO {table_name} VALUES ({values});")
+
+	with open(filepath, "w", encoding="utf-8", newline="") as f:
+		f.write(create_table_sql)
+		f.write("\n")
+		f.write("\n".join(insert_statements))
+		f.write("\n")
+
+	print(f"\nSQL salvo em: {filepath}")
+
+
+def save_abilities_sql(rows, filename="003_abilities.sql"):
+	create_table_sql = """DROP TABLE IF EXISTS abilities;
+
+CREATE TABLE abilities (
+	id SERIAL PRIMARY KEY,
+	name TEXT NOT NULL,
+	generation_introduced TEXT NOT NULL,
+	description TEXT NOT NULL,
+	short_description TEXT NOT NULL
+);
+"""
+	save_sql(rows, filename, "abilities", create_table_sql)
+
+
+def save_pokemon_abilities_sql(rows, filename="005_pokemon_abilities.sql"):
+	create_table_sql = """DROP TABLE IF EXISTS pokemon_abilities;
+
+CREATE TABLE pokemon_abilities (
+	pokemon_id INTEGER NOT NULL,
+	pokemon_name TEXT NOT NULL,
+	ability_name TEXT NOT NULL,
+	ability_id INTEGER NOT NULL,
+	ability_slot INTEGER NOT NULL,
+	is_hidden BOOLEAN NOT NULL,
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (pokemon_id, ability_id),
+	FOREIGN KEY (pokemon_id) REFERENCES pokemon(id),
+	FOREIGN KEY (ability_id) REFERENCES abilities(id)
+);
+"""
+	save_sql(rows, filename, "pokemon_abilities", create_table_sql)
 
 
 if __name__ == "__main__":
-	abilities_rows, pokemon_has_abilities_rows = build_rows()
-	save_csv(
-		abilities_rows,
-		"abilities.csv",
-		[
-			"id",
-			"name",
-			"is_main_series",
-			"generation_introduced",
-			"description",
-			"short_description",
-		],
-	)
-	save_csv(
-		pokemon_has_abilities_rows,
-		"pokemon_has_abilities.csv",
-		[
-			"pokemon_id",
-			"pokemon_name",
-			"ability_name",
-			"ability_id",
-			"ability_slot",
-			"is_hidden",
-		],
-	)
+	abilities_rows, _ = build_rows()
+	save_abilities_sql(abilities_rows)

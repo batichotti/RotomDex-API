@@ -76,16 +76,68 @@ def build_items():
 	return items
 
 
-def save_json(items, filename="items.json"):
+def format_sql_value(value):
+	if value is None:
+		return "NULL"
+	if isinstance(value, bool):
+		return "TRUE" if value else "FALSE"
+	if isinstance(value, (list, dict, tuple)):
+		value = json.dumps(value, ensure_ascii=False)
+	if isinstance(value, str):
+		escaped = value.replace("'", "''")
+		return f"'{escaped}'"
+	return str(value)
+
+
+def save_sql(items, filename="004_items.sql"):
 	script_dir = os.path.dirname(os.path.abspath(__file__))
-	filepath = os.path.join(script_dir, filename)
+	migrations_dir = os.path.abspath(os.path.join(script_dir, "..", "migrations"))
+	filepath = os.path.join(migrations_dir, filename)
 
-	with open(filepath, "w", encoding="utf-8") as f:
-		json.dump(items, f, ensure_ascii=False, indent=2)
+	os.makedirs(migrations_dir, exist_ok=True)
 
-	print(f"\nJSON salvo em: {filepath}")
+	create_table_sql = """DROP TABLE IF EXISTS items;
+
+CREATE TABLE items (
+	id INTEGER PRIMARY KEY,
+	name TEXT NOT NULL,
+	cost INTEGER NOT NULL,
+	fling_power INTEGER NOT NULL,
+	category TEXT NOT NULL,
+	attributes TEXT NOT NULL,
+	held_by_pokemon TEXT NOT NULL,
+	baby_trigger_for TEXT NOT NULL,
+	machine TEXT NOT NULL,
+	description TEXT NOT NULL
+);
+"""
+
+	insert_statements = []
+	for item in items:
+		row = [
+			item["id"],
+			item["name"],
+			item["cost"],
+			item["fling_power"],
+			item["category"],
+			item["attributes"],
+			item["held_by_pokemon"],
+			item["baby_trigger_for"],
+			item["machine"],
+			item["description"],
+		]
+		values = ", ".join(format_sql_value(value) for value in row)
+		insert_statements.append(f"INSERT INTO items VALUES ({values});")
+
+	with open(filepath, "w", encoding="utf-8", newline="") as f:
+		f.write(create_table_sql)
+		f.write("\n")
+		f.write("\n".join(insert_statements))
+		f.write("\n")
+
+	print(f"\nSQL salvo em: {filepath}")
 
 
 if __name__ == "__main__":
 	items = build_items()
-	save_json(items)
+	save_sql(items)
