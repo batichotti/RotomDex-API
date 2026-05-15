@@ -11,13 +11,11 @@ export class PokemonController {
 
     @Get()
     findAll(@Query() query: PokemonQueryDto) {
-        const { type, type2, min, max, fill, orderBy, order } = query;
-
-        if (type2 && !type) {
+        if (query.type2 && !query.type) {
             throw new BadRequestException('Type 2 cannot be used without Type 1');
         }
 
-        return this.pokemonService.findFiltered( orderBy as keyof Pokemon, order, type, type2 || '', min, max, fill);
+        return this.pokemonService.findFiltered( query );
     }
 
     @Get(':identifier')

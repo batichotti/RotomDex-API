@@ -24,12 +24,6 @@ const ITEM_CATEGORIES = [
 ] as const;
 
 export class ItemsQueryDto {
-    @ApiPropertyOptional({ type: String })
-    @IsOptional()
-    @IsString()
-    name?: string;
-
-    
     @ApiPropertyOptional({ type: Number })
     @IsOptional()
     @Type(() => Number)

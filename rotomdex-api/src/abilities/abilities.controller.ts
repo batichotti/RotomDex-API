@@ -8,9 +8,8 @@ export class AbilitiesController {
 
   @Get()
   findAll(@Query() query: AbilitiesQueryDto) {
-    const {generation_min, generation, generation_max} = query;
-    if(!(generation_min || generation || generation_max)) return this.abilitiesService.findAll();
-    else return this.abilitiesService.findFiltered(generation_min!, generation!, generation_max!);
+    if(!(query.generation_min || query.generation || query.generation_max)) return this.abilitiesService.findAll();
+    else return this.abilitiesService.findFiltered(query);
   }
 
   @Get(':name')

@@ -24,7 +24,6 @@ export class PokemonAbilitiesController {
   
   @Get('/ability/:id')
   findByAbility(@Param('id') id: string, @Query() query: AbilitiesPokemonDto) {
-    const {is_hidden, type, type2, min, max, fill, orderBy, order}  = query;
-    return this.pokemonAbilitiesService.findByAbility(id,  orderBy || 'id', order || 'ASC', is_hidden, type, type2, min, max, fill);
+    return this.pokemonAbilitiesService.findByAbility(id, query);
   }
 }
