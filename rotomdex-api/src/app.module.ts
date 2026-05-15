@@ -8,6 +8,7 @@ import { MovesModule } from './moves/moves.module';
 import { AbilitiesModule } from './abilities/abilities.module';
 import { PokemonMovesModule } from './pokemon-moves/pokemon-moves.module';
 import { PokemonAbilitiesModule } from './pokemon-abilities/pokemon-abilities.module';
+import { ItemsModule } from './items/items.module';
 
 @Module({
   imports: [
@@ -39,6 +40,8 @@ import { PokemonAbilitiesModule } from './pokemon-abilities/pokemon-abilities.mo
     PokemonMovesModule,
 
     PokemonAbilitiesModule,
+
+    ItemsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
