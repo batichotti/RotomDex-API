@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ILike, Repository } from 'typeorm';
 import { Abilities } from './entities/ability.entity';
+import { AbilitiesQueryDto } from './dto/abilities-query.dto';
 
 const GENERATIONS = ['none', 'generation-i', 'generation-ii', 'generation-iii', 'generation-iv', 'generation-v', 'generation-vi', 'generation-vii', 'generation-viii', 'generation-ix']
 @Injectable()
@@ -20,30 +21,30 @@ export class AbilitiesService {
     return this.abilitiesRepository.findBy({ name: ILike(`%${name}%`) });
   }
 
-  findFiltered(generation_min: number, generation: number, generation_max: number) {
-    const query = this.abilitiesRepository.createQueryBuilder('ability');
+  findFiltered(query: AbilitiesQueryDto ) {
+    const qb = this.abilitiesRepository.createQueryBuilder('ability');
 
     
 
-    if (generation_min !== undefined && generation_max !== undefined) {
-      query.andWhere('ability.generation_introduced BETWEEN :generation_min AND :generation_max', {
-        generation_min: GENERATIONS[generation_min],
-        generation_max: GENERATIONS[generation_max],
+    if (query.generation_min !== undefined && query.generation_max !== undefined) {
+      qb.andWhere('ability.generation_introduced BETWEEN :generation_min AND :generation_max', {
+        generation_min: GENERATIONS[query.generation_min],
+        generation_max: GENERATIONS[query.generation_max],
       });
-    } else if (generation_min !== undefined) {
-      query.andWhere('ability.generation_introduced >= :generation_min', {
-        generation_min: GENERATIONS[generation_min],
+    } else if (query.generation_min !== undefined) {
+      qb.andWhere('ability.generation_introduced >= :generation_min', {
+        generation_min: GENERATIONS[query.generation_min],
       });
-    } else if (generation_max !== undefined) {
-      query.andWhere('ability.generation_introduced <= :generation_max', {
-        generation_max: GENERATIONS[generation_max],
+    } else if (query.generation_max !== undefined) {
+      qb.andWhere('ability.generation_introduced <= :generation_max', {
+        generation_max: GENERATIONS[query.generation_max],
       });
-    } else if (generation !== undefined) {
-      query.andWhere('ability.generation_introduced = :generation', {
-        generation: GENERATIONS[generation],
+    } else if (query.generation !== undefined) {
+      qb.andWhere('ability.generation_introduced = :generation', {
+        generation: GENERATIONS[query.generation],
       });
     }
 
-    return query.getMany();
+    return qb.getMany();
   }
 }

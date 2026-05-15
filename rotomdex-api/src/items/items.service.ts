@@ -18,10 +18,6 @@ export class ItemsService {
   findFiltered(query: ItemsQueryDto) {
     const qb = this.itemsRepository.createQueryBuilder('item');
 
-    if (query.name !== undefined) {
-      qb.andWhere('item.name ILIKE :name', { name: `%${query.name}%` });
-    }
-
     if (query.cost_min !== undefined && query.cost_max !== undefined) {
       qb.andWhere('item.cost BETWEEN :cost_min AND :cost_max', {
         cost_min: query.cost_min,

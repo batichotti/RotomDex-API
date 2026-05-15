@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Brackets, Repository } from 'typeorm';
 import { PokemonMoves } from './entities/pokemon-moves.entity';
+import { PokemonMovesDto } from './dto/pokemon-moves-query.dto';
+import { MovesPokemonDto } from './dto/moves-pokemon-query.dto ';
 
 @Injectable()
 export class PokemonMovesService {
@@ -28,7 +30,7 @@ export class PokemonMovesService {
     };
   }
 
-  findByPokemon(id: string, orderBy?: string, order?: string, learn_method?: string, type?: string, power?: number, pp?: number, effect_chance?: number, accuracy?: number, min?: number, max?: number, fill?: string, damage_class?: string, category?: string, generation?: string) {
+  findByPokemon(id: string, query: PokemonMovesDto) {
     const qb = this.pokemonMovesRepository
       .createQueryBuilder('pokemon_move')
       .leftJoinAndMapOne(
@@ -39,37 +41,37 @@ export class PokemonMovesService {
       )
       .where('pokemon_move.pokemon_id = :id', { id });
 
-    if (learn_method) qb.andWhere('pokemon_move.move_learn_method = :learn_method', { learn_method });
+    if (query.learn_method) qb.andWhere('pokemon_move.move_learn_method = :learn_method', { learn_method: query.learn_method });
 
     // filters similar to MovesService.findFiltered
-    if (type) qb.andWhere('move.type ILIKE :type', { type });
-    if (power !== undefined) qb.andWhere('move.power = :power', { power });
-    if (pp !== undefined) qb.andWhere('move.pp = :pp', { pp });
-    if (effect_chance !== undefined) qb.andWhere('move.effect_chance = :effect_chance', { effect_chance });
-    if (accuracy !== undefined) qb.andWhere('move.accuracy = :accuracy', { accuracy });
-    if (damage_class) qb.andWhere('move.damage_class ILIKE :damage_class', { damage_class });
-    if (category) qb.andWhere('move.category ILIKE :category', { category });
-    if (generation) qb.andWhere('move.generation_introduced ILIKE :generation', { generation });
+    if (query.type) qb.andWhere('move.type ILIKE :type', { type: query.type });
+    if (query.power !== undefined) qb.andWhere('move.power = :power', { power: query.power });
+    if (query.pp !== undefined) qb.andWhere('move.pp = :pp', { pp: query.pp });
+    if (query.effect_chance !== undefined) qb.andWhere('move.effect_chance = :effect_chance', { effect_chance: query.effect_chance });
+    if (query.accuracy !== undefined) qb.andWhere('move.accuracy = :accuracy', { accuracy: query.accuracy });
+    if (query.damage_class) qb.andWhere('move.damage_class ILIKE :damage_class', { damage_class: query.damage_class });
+    if (query.category) qb.andWhere('move.category ILIKE :category', { category: query.category });
+    if (query.generation) qb.andWhere('move.generation_introduced ILIKE :generation', { generation: query.generation });
 
-    if (fill) {
-      if (min !== undefined && max !== undefined) {
-        qb.andWhere(`move.${fill} BETWEEN :min AND :max`, { min, max });
-      } else if (min !== undefined) {
-        qb.andWhere(`move.${fill} >= :min`, { min });
-      } else if (max !== undefined) {
-        qb.andWhere(`move.${fill} <= :max`, { max });
+    if (query.fill) {
+      if (query.min !== undefined && query.max !== undefined) {
+        qb.andWhere(`move.${query.fill} BETWEEN :min AND :max`, { min: query.min, max: query.max });
+      } else if (query.min !== undefined) {
+        qb.andWhere(`move.${query.fill} >= :min`, { min: query.min });
+      } else if (query.max !== undefined) {
+        qb.andWhere(`move.${query.fill} <= :max`, { max: query.max });
       }
     }
 
-    if (orderBy) {
+    if (query.orderBy) {
       // guard against SQL injection by allowing only certain columns could be added later
-      qb.orderBy(`move.${orderBy}`, (order?.toUpperCase() as 'ASC' | 'DESC') || 'ASC');
+      qb.orderBy(`move.${query.orderBy}`, (query.order?.toUpperCase() as 'ASC' | 'DESC') || 'ASC');
     }
 
     return qb.getMany();
   }
 
-  findByMove(id: string, orderBy?: string, order?: string, learn_method?: string, type?: string, type2?: string, min?: number, max?: number, fill?: string) {
+  findByMove(id: string, query: MovesPokemonDto) {
     const qb = this.pokemonMovesRepository
       .createQueryBuilder('pokemon_move')
       .leftJoinAndMapOne(
@@ -80,38 +82,38 @@ export class PokemonMovesService {
         )
       .where('pokemon_move.move_id = :id', { id });
   
-    if (learn_method) qb.andWhere('pokemon_move.move_learn_method = :learn_method', { learn_method });
+    if (query.learn_method) qb.andWhere('pokemon_move.move_learn_method = :learn_method', { learn_method: query.learn_method });
 
-    if (fill) {
-      if (min !== undefined && max !== undefined) {
-        qb.andWhere(`pokemon.${fill} BETWEEN :min AND :max`, { min, max });
-      } else if (min !== undefined) {
-        qb.andWhere(`pokemon.${fill} >= :min`, { min });
-      } else if (max !== undefined) {
-        qb.andWhere(`pokemon.${fill} <= :max`, { max });
+    if (query.fill) {
+      if (query.min !== undefined && query.max !== undefined) {
+        qb.andWhere(`pokemon.${query.fill} BETWEEN :min AND :max`, { min: query.min, max: query.max });
+      } else if (query.min !== undefined) {
+        qb.andWhere(`pokemon.${query.fill} >= :min`, { min: query.min });
+      } else if (query.max !== undefined) {
+        qb.andWhere(`pokemon.${query.fill} <= :max`, { max: query.max });
       }
     }
 
-    if (type && type2) {
+    if (query.type && query.type2) {
       qb.andWhere(
         new Brackets((queryBuilder) => {
           queryBuilder
-            .where('(pokemon.primary_type ILIKE :type AND pokemon.secondary_type ILIKE :type2)', { type, type2 })
-            .orWhere('(pokemon.primary_type ILIKE :type2 AND pokemon.secondary_type ILIKE :type)', { type, type2 });
+            .where('(pokemon.primary_type ILIKE :type AND pokemon.secondary_type ILIKE :type2)', { type: query.type, type2: query.type2 })
+            .orWhere('(pokemon.primary_type ILIKE :type2 AND pokemon.secondary_type ILIKE :type)', { type: query.type, type2: query.type2 });
         }),
       );
-    } else if (type) {
+    } else if (query.type) {
       qb.andWhere(
         new Brackets((queryBuilder) => {
           queryBuilder
-            .where('pokemon.primary_type ILIKE :type', { type })
-            .orWhere('pokemon.secondary_type ILIKE :type', { type });
+            .where('pokemon.primary_type ILIKE :type', { type: query.type })
+            .orWhere('pokemon.secondary_type ILIKE :type', { type: query.type });
         }),
       );
     }
 
-    if (orderBy) {
-      qb.orderBy(`pokemon.${orderBy}`, (order?.toUpperCase() as 'ASC' | 'DESC') || 'ASC');
+    if (query.orderBy) {
+      qb.orderBy(`pokemon.${query.orderBy}`, (query.order?.toUpperCase() as 'ASC' | 'DESC') || 'ASC');
     }
 
     return qb.getMany();

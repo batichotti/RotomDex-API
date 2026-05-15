@@ -8,8 +8,7 @@ export class MovesController {
 
   @Get()
   findAll(@Query() query: MovesQueryDto) {
-    const {type, power, pp, effect_chance, accuracy, min, max, fill, damage_class, category, generation, orderBy, order} = query;
-    return this.movesService.findFiltered( orderBy, order, power, type, pp, effect_chance, accuracy, min, max, fill, damage_class, category, generation);
+    return this.movesService.findFiltered(query);
   }
 
   @Get(':name')
