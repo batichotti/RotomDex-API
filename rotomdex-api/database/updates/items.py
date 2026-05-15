@@ -24,22 +24,6 @@ def get_item_data(item_url):
 	cost = data["cost"] if data.get("cost") is not None else 0
 	fling_power = data["fling_power"] if data.get("fling_power") is not None else 0
 	item_category = data["category"]["name"] if data.get("category") else ""
-	item_attributes = [attribute["name"] for attribute in data.get("attributes", [])]
-	held_by_pokemon = [
-		{
-			"pokemon": entry["pokemon"]["name"],
-			"version_details": [
-				{
-					"rarity": detail.get("rarity", 0),
-					"version": detail["version"]["name"] if detail.get("version") else "",
-				}
-				for detail in entry.get("version_details", [])
-			],
-		}
-		for entry in data.get("held_by_pokemon", [])
-	]
-	baby_trigger_for = data["baby_trigger_for"]["name"] if data.get("baby_trigger_for") else ""
-	machine = data["machines"][0]["machine"]["url"] if data.get("machines") else ""
 
 	description = ""
 	for entry in data.get("flavor_text_entries", []):
@@ -53,10 +37,6 @@ def get_item_data(item_url):
 		"cost": cost,
 		"fling_power": fling_power,
 		"category": item_category,
-		"attributes": item_attributes,
-		"held_by_pokemon": held_by_pokemon,
-		"baby_trigger_for": baby_trigger_for,
-		"machine": machine,
 		"description": description,
 	}
 
@@ -104,10 +84,6 @@ CREATE TABLE items (
 	cost INTEGER NOT NULL,
 	fling_power INTEGER NOT NULL,
 	category TEXT NOT NULL,
-	attributes TEXT NOT NULL,
-	held_by_pokemon TEXT NOT NULL,
-	baby_trigger_for TEXT NOT NULL,
-	machine TEXT NOT NULL,
 	description TEXT NOT NULL
 );
 """
@@ -120,10 +96,6 @@ CREATE TABLE items (
 			item["cost"],
 			item["fling_power"],
 			item["category"],
-			item["attributes"],
-			item["held_by_pokemon"],
-			item["baby_trigger_for"],
-			item["machine"],
 			item["description"],
 		]
 		values = ", ".join(format_sql_value(value) for value in row)
