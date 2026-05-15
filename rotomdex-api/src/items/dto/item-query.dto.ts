@@ -23,16 +23,6 @@ const ITEM_CATEGORIES = [
   'medicine',
 ] as const;
 
-const ITEM_ATTRIBUTES = [ // exemplo: '["countable", "consumable", "usable-in-battle", "holdable"]'
-  'countable',
-  'consumable',
-  'usable-overworld',
-  'usable-in-battle',
-  'holdable',
-  'holdable-active',
-  'underground',
-] as const;
-
 export class ItemsQueryDto {
     @ApiPropertyOptional({ type: String })
     @IsOptional()
@@ -67,12 +57,6 @@ export class ItemsQueryDto {
     @IsOptional()
     @IsIn([...ITEM_CATEGORIES], {message: `category must be one of ${ITEM_CATEGORIES.join(', ')}`})
     category?: string;
-
-    @ApiPropertyOptional({ type: [String], enum: ITEM_ATTRIBUTES })
-    @IsOptional()
-    @IsArray()
-    @IsIn([...ITEM_ATTRIBUTES], { each: true, message: `attributes must be one of ${ITEM_ATTRIBUTES.join(', ')}` })
-    attributes?: typeof ITEM_ATTRIBUTES[number][];
 
     @ApiPropertyOptional({ type: String })
     @IsOptional()

@@ -45,12 +45,6 @@ export class ItemsService {
       qb.andWhere('item.category = :category', { category: query.category });
     }
 
-    if (query.attributes !== undefined && query.attributes.length > 0) {
-      qb.andWhere('item.attributes::jsonb @> :attributes', {
-        attributes: JSON.stringify(query.attributes),
-      });
-    }
-
     if (query.description !== undefined) {
       qb.andWhere('item.description ILIKE :description', {
         description: `%${query.description}%`,

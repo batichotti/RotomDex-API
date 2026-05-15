@@ -18,17 +18,5 @@ export class Items {
     category!: string;
 
     @Column()
-    attributes!: string;
-
-    @Column()
-    held_by_pokemon!: string;
-
-    @Column()
-    baby_trigger_for!: string;
-
-    @Column()
-    machine!: string;
-
-    @Column()
     description!: string;
 }
