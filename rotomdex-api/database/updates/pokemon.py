@@ -26,6 +26,10 @@ def get_pokemon_data(pokemon_url):
 
     primary_type = data["types"][0]["type"]["name"] if data["types"] else ""
     secondary_type = data["types"][1]["type"]["name"] if len(data["types"]) > 1 else "None"
+    front_default = data.get("sprites", {}).get("front_default")
+    front_shiny = data.get("sprites", {}).get("front_shiny")
+    front_female = data.get("sprites", {}).get("front_female")
+    front_shiny_female = data.get("sprites", {}).get("front_shiny_female")
     
     hp = next((stat["base_stat"] for stat in data["stats"] if stat["stat"]["name"] == "hp"), 0)
     attack = next((stat["base_stat"] for stat in data["stats"] if stat["stat"]["name"] == "attack"), 0)
@@ -73,6 +77,10 @@ def get_pokemon_data(pokemon_url):
         egg_group_2,
         primary_type,
         secondary_type,
+        front_default,
+        front_shiny,
+        front_female,
+        front_shiny_female,
         hp,
         attack,
         defense,
@@ -122,7 +130,7 @@ def save_sql(rows, filename="001_pokemon.sql"):
 
     os.makedirs(migrations_dir, exist_ok=True)
 
-    create_table_sql = """DROP TABLE IF EXISTS pokemon;
+    create_table_sql = """DROP TABLE IF EXISTS pokemon CASCADE;
 
 CREATE TABLE pokemon (
     id INTEGER PRIMARY KEY,
@@ -142,6 +150,10 @@ CREATE TABLE pokemon (
     egg_group_2 VARCHAR(20),
     primary_type VARCHAR(20) NOT NULL,
     secondary_type VARCHAR(20),
+    front_default TEXT,
+    front_shiny TEXT,
+    front_female TEXT,
+    front_shiny_female TEXT,
     hp SMALLINT NOT NULL,
     attack SMALLINT NOT NULL,
     defense SMALLINT NOT NULL,
