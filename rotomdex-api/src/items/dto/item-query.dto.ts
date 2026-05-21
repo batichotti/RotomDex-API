@@ -56,4 +56,14 @@ export class ItemsQueryDto {
     @IsOptional()
     @IsString()
     description?: string;
+
+    @ApiPropertyOptional({ enum: ['name', 'cost', 'fling_power'] })
+    @IsOptional()
+    @IsIn(['name', 'cost', 'fling_power'], { message: 'orderBy must be one of: name, cost, fling_power' })
+    orderBy?: 'name' | 'cost' | 'fling_power';
+
+    @ApiPropertyOptional({ enum: ['ASC', 'DESC'] })
+    @IsOptional()
+    @IsIn(['ASC', 'DESC'], { message: 'order must be ASC or DESC' })
+    order?: 'ASC' | 'DESC';
 }

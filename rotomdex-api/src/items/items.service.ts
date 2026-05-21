@@ -2,13 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { ItemsQueryDto } from './dto/item-query.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ILike, Repository } from 'typeorm';
-import { Items } from './entities/item.entity';
+import { Item } from './entities/item.entity';
 
 @Injectable()
 export class ItemsService {
   constructor(
-    @InjectRepository(Items)
-    private itemsRepository: Repository<Items>,
+    @InjectRepository(Item)
+    private itemsRepository: Repository<Item>,
   ) {}
 
   findAll() {
@@ -45,6 +45,11 @@ export class ItemsService {
       qb.andWhere('item.description ILIKE :description', {
         description: `%${query.description}%`,
       });
+    }
+
+    if (query.orderBy !== undefined) {
+      const order = query.order || 'ASC';
+      qb.orderBy(`item.${query.orderBy}`, order);
     }
 
     return qb.getMany();
