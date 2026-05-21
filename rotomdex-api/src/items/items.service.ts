@@ -51,6 +51,7 @@ export class ItemsService {
   }
 
   findOne(name: string) {
+    name = name.replace(/ /g, '-');
     return this.itemsRepository.findBy({ name: ILike(`%${name}%`) }) ;
   }
 }
