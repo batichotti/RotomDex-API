@@ -20,14 +20,17 @@ export class PokemonService {
   }
 
   findByDex(id: number) {
-    return this.pokemonRepository.findBy({
-      id: id,
+    return this.pokemonRepository.find({
+      where: { id: id },
+      order: { id: 'ASC' },
     });
   }
 
   findByName(name: string) {
-    return this.pokemonRepository.findBy({
-      name: ILike(`%${name}%`),
+    name = name.replace(/ /g, '-');
+    return this.pokemonRepository.find({
+      where: { name: ILike(`%${name}%`) },
+      order: { id: 'ASC' },
     });
   }
 
@@ -67,5 +70,27 @@ export class PokemonService {
     }
 
     return qb.getMany();
+  }
+  
+  findBySpeciesId(id: number){
+    return this.pokemonRepository.findOne({
+      where: { species_id: id },
+      order: { id: 'ASC' },
+    });
+  }
+
+  async findBySpeciesName(name: string) {
+    name = name.replace(/ /g, '-');
+
+    const matched = await this.pokemonRepository.findOne({
+      where: { name: ILike(`%${name}%`) },
+    });
+
+    if (!matched) return null;
+
+    return this.pokemonRepository.findOne({
+      where: { species_id: matched.species_id },
+      order: { id: 'ASC' },
+    });
   }
 }

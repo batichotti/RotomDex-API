@@ -31,4 +31,17 @@ export class PokemonController {
 
         return this.pokemonService.findByName(identifier);
     }
+
+    @Get('species/:identifier')
+    findOneBySpecies(@Param('identifier') identifier: string){
+        const asNumber = Number(identifier);
+
+        if(!isNaN(asNumber)){
+            if (asNumber < 1 || asNumber > 1025) {
+                throw new BadRequestException('Pokemon ID must be between 1 and 1025');
+            }
+            return this.pokemonService.findBySpeciesId(asNumber);
+        }
+        return this.pokemonService.findBySpeciesName(identifier);
+    }
 }
