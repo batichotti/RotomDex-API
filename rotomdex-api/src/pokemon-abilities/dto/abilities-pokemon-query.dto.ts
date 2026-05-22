@@ -1,13 +1,20 @@
-import { IsOptional, IsIn, IsEnum, IsInt, Min } from 'class-validator';
+import { IsOptional, IsIn, IsEnum, IsInt, Min, IsBoolean } from 'class-validator';
 import { ApiPropertyOptional } from '@nestjs/swagger';
-import { Type } from 'class-transformer';
+import { Type, Transform } from 'class-transformer';
 
 const POKEMON_TYPES = ['bug', 'dark', 'dragon', 'electric', 'fairy', 'fighting', 'fire', 'flying', 'ghost', 'grass', 'ground', 'ice', 'normal', 'poison', 'psychic', 'rock', 'steel', 'water'] as const;
 const POKEMON_ATTRIBUTES = ['attack', 'bst', 'defense', 'hp', 'id', 'name', 'special_attack', 'special_defense', 'speed', 'height', 'weight'] as const;
 const POKEMON_ATTRIBUTES_TO_FILL = ['attack', 'bst', 'defense', 'hp', 'id', 'special_attack', 'special_defense', 'speed', 'height', 'weight'] as const;
 
 export class AbilitiesPokemonDto{
+    @ApiPropertyOptional({ type: Boolean, description: 'Filtra por hidden (true/false)' })
     @IsOptional()
+    @Transform(({ value }) => {
+        if (value === true || value === 'true') return true;
+        if (value === false || value === 'false') return false;
+        return value;
+    })
+    @IsBoolean({ message: 'is_hidden must be true or false' })
     is_hidden?: boolean;
 
     @ApiPropertyOptional({ enum: POKEMON_TYPES })

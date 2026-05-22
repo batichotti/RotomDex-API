@@ -16,13 +16,12 @@ export class PokemonMovesController {
 
   @Get('/pokemon/:id')
   findByPokemon(@Param('id') id: string, @Query() query: PokemonMovesDto) {
-    const {learn_method, type, power, pp, effect_chance, accuracy, min, max, fill, damage_class, category, generation, orderBy, order} = query;
-    return this.pokemonMovesService.findByPokemon(id, orderBy || 'name', order || 'ASC', learn_method, type, power, pp, effect_chance, accuracy, min, max, fill, damage_class, category, generation);
+    return this.pokemonMovesService.findByPokemon(id, query);
   }
 
   @Get('/moves/:id')
   findByMoves(@Param('id') id: string, @Query() query: MovesPokemonDto) {
     const {learn_method, type, type2, min, max, fill, orderBy, order} = query;
-    return this.pokemonMovesService.findByMove(id, orderBy || 'id', order || 'ASC', learn_method, type, type2, min, max, fill);
+    return this.pokemonMovesService.findByMove(id, query);
   }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Brackets, Repository } from 'typeorm';
 import { PokemonAbilities } from './entities/pokemon-abilities.entity';
+import { AbilitiesPokemonDto } from './dto/abilities-pokemon-query.dto';
 
 @Injectable()
 export class PokemonAbilitiesService {
@@ -35,7 +36,7 @@ export class PokemonAbilitiesService {
       };
     }
 
-  findByPokemon(id: number, is_hidden) {
+  findByPokemon(id: number, is_hidden?: boolean | string) {
     const qb = this.pokemonAbilitiesRepository
       .createQueryBuilder('pokemon_ability')
       .leftJoinAndMapOne(
@@ -52,7 +53,7 @@ export class PokemonAbilitiesService {
     return qb.getMany();
   }
   
-  findByAbility(id: string, orderBy?: string, order?: string, is_hidden?: boolean, type?: string, type2?: string, min?: number, max?: number, fill?: string)  {
+  findByAbility(id: string, query: AbilitiesPokemonDto)  {
     const qb = this.pokemonAbilitiesRepository
       .createQueryBuilder('pokemon_ability')
       .leftJoinAndMapOne(
@@ -63,38 +64,38 @@ export class PokemonAbilitiesService {
         )
       .where('pokemon_ability.ability_id = :id', { id });
   
-    if (is_hidden) qb.andWhere('pokemon_ability.is_hidden = :is_hidden', { is_hidden });
+    if (query.is_hidden) qb.andWhere('pokemon_ability.is_hidden = :is_hidden', { is_hidden: query.is_hidden });
 
-    if (fill) {
-      if (min !== undefined && max !== undefined) {
-        qb.andWhere(`pokemon.${fill} BETWEEN :min AND :max`, { min, max });
-      } else if (min !== undefined) {
-        qb.andWhere(`pokemon.${fill} >= :min`, { min });
-      } else if (max !== undefined) {
-        qb.andWhere(`pokemon.${fill} <= :max`, { max });
+    if (query.fill) {
+      if (query.min !== undefined && query.max !== undefined) {
+        qb.andWhere(`pokemon.${query.fill} BETWEEN :min AND :max`, { min: query.min, max: query.max });
+      } else if (query.min !== undefined) {
+        qb.andWhere(`pokemon.${query.fill} >= :min`, { min: query.min });
+      } else if (query.max !== undefined) {
+        qb.andWhere(`pokemon.${query.fill} <= :max`, { max: query.max });
       }
     }
 
-    if (type && type2) {
+    if (query.type && query.type2) {
       qb.andWhere(
         new Brackets((queryBuilder) => {
           queryBuilder
-            .where('(pokemon.primary_type ILIKE :type AND pokemon.secondary_type ILIKE :type2)', { type, type2 })
-            .orWhere('(pokemon.primary_type ILIKE :type2 AND pokemon.secondary_type ILIKE :type)', { type, type2 });
+            .where('(pokemon.primary_type ILIKE :type AND pokemon.secondary_type ILIKE :type2)', { type: query.type, type2: query.type2 })
+            .orWhere('(pokemon.primary_type ILIKE :type2 AND pokemon.secondary_type ILIKE :type)', { type: query.type, type2: query.type2 });
         }),
       );
-    } else if (type) {
+    } else if (query.type) {
       qb.andWhere(
         new Brackets((queryBuilder) => {
           queryBuilder
-            .where('pokemon.primary_type ILIKE :type', { type })
-            .orWhere('pokemon.secondary_type ILIKE :type', { type });
+            .where('pokemon.primary_type ILIKE :type', { type: query.type })
+            .orWhere('pokemon.secondary_type ILIKE :type', { type: query.type });
         }),
       );
     }
 
-    if (orderBy) {
-      qb.orderBy(`pokemon.${orderBy}`, (order?.toUpperCase() as 'ASC' | 'DESC') || 'ASC');
+    if (query.orderBy) {
+      qb.orderBy(`pokemon.${query.orderBy}`, (query.order?.toUpperCase() as 'ASC' | 'DESC') || 'ASC');
     }
 
     return qb.getMany();
