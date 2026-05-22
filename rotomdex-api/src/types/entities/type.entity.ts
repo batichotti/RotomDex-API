@@ -1,13 +1,13 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, Column, PrimaryColumn } from 'typeorm';
 
-@Entity('type')
+@Entity('types')
 export class Type {
-    @Column()
+    @PrimaryColumn()
     attack_type!: string;
 
-    @Column()
+    @PrimaryColumn()
     defense_type!: string;
 
-    @Column()
+    @Column('numeric', { precision: 4, scale: 2 })
     effectiveness!: number;
 }
