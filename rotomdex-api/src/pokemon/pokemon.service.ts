@@ -69,6 +69,38 @@ export class PokemonService {
       );
     }
 
+    if (query.isLegendary !== undefined) {
+      qb.andWhere('pokemon.is_legendary = :isLegendary', { isLegendary: query.isLegendary });
+    }
+
+    if (query.isMythical !== undefined) {
+      qb.andWhere('pokemon.is_mythical = :isMythical', { isMythical: query.isMythical });
+    }
+
+    if (query.isBaby !== undefined) {
+      qb.andWhere('pokemon.is_baby = :isBaby', { isBaby: query.isBaby });
+    }
+
+    if (query.hasGenderDifferences !== undefined) {
+      qb.andWhere('pokemon.has_gender_differences = :hasGenderDifferences', { hasGenderDifferences: query.hasGenderDifferences });
+    }
+
+    if (query.formsSwitchable !== undefined) {
+      qb.andWhere('pokemon.forms_switchable = :formsSwitchable', { formsSwitchable: query.formsSwitchable });
+    }
+
+    if (query.isMega !== undefined) {
+      qb.andWhere('pokemon.is_mega = :isMega', { isMega: query.isMega });
+    }
+
+    if (query.isGmax !== undefined) {
+      qb.andWhere('pokemon.is_gmax = :isGmax', { isGmax: query.isGmax });
+    }
+
+    if (query.isRegionalForm !== undefined) {
+      qb.andWhere('pokemon.is_regional_form = :isRegionalForm', { isRegionalForm: query.isRegionalForm });
+    }
+
     return qb.getMany();
   }
   

@@ -1,4 +1,4 @@
-import { IsOptional, IsIn, IsEnum, IsInt, Min, Validate, ValidatorConstraint, ValidatorConstraintInterface, ValidationArguments } from 'class-validator';
+import { IsOptional, IsIn, IsEnum, IsInt, Min, IsBoolean, Validate, ValidatorConstraint, ValidatorConstraintInterface, ValidationArguments } from 'class-validator';
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 
@@ -45,4 +45,52 @@ export class PokemonQueryDto {
     @IsOptional()
     @IsEnum(['ASC', 'DESC'], { message: 'order must be ASC or DESC' })
     order?: 'ASC' | 'DESC' = 'ASC';
+
+    @ApiPropertyOptional({ type: Boolean })
+    @IsOptional()
+    @Type(() => Boolean)
+    @IsBoolean()
+    isLegendary?: boolean;
+
+    @ApiPropertyOptional({ type: Boolean })
+    @IsOptional()
+    @Type(() => Boolean)
+    @IsBoolean()
+    isMythical?: boolean;
+
+    @ApiPropertyOptional({ type: Boolean })
+    @IsOptional()
+    @Type(() => Boolean)
+    @IsBoolean()
+    isBaby?: boolean;
+
+    @ApiPropertyOptional({ type: Boolean })
+    @IsOptional()
+    @Type(() => Boolean)
+    @IsBoolean()
+    hasGenderDifferences?: boolean;
+
+    @ApiPropertyOptional({ type: Boolean })
+    @IsOptional()
+    @Type(() => Boolean)
+    @IsBoolean()
+    formsSwitchable?: boolean;
+
+    @ApiPropertyOptional({ type: Boolean })
+    @IsOptional()
+    @Type(() => Boolean)
+    @IsBoolean()
+    isMega?: boolean;
+
+    @ApiPropertyOptional({ type: Boolean })
+    @IsOptional()
+    @Type(() => Boolean)
+    @IsBoolean()
+    isGmax?: boolean;
+
+    @ApiPropertyOptional({ type: Boolean })
+    @IsOptional()
+    @Type(() => Boolean)
+    @IsBoolean()
+    isRegionalForm?: boolean;
 }
