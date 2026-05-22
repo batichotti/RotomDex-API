@@ -18,6 +18,7 @@ export class AbilitiesService {
   }
 
   findOne(name: string) {
+    name = name.replace(/ /g, '-');
     return this.abilitiesRepository.findBy({ name: ILike(`%${name}%`) });
   }
 

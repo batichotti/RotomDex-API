@@ -53,18 +53,6 @@ export class Pokemon {
   @Column({ length: 20, nullable: true })
   secondary_type?: string;
 
-  @Column({ nullable: true })
-  front_default?: string;
-
-  @Column({ nullable: true })
-  front_shiny?: string;
-
-  @Column({ nullable: true })
-  front_female?: string;
-
-  @Column({ nullable: true })
-  front_shiny_female?: string;
-
   @Column({ type: 'smallint' })
   hp!: number;
 
