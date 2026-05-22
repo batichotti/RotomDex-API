@@ -7,9 +7,8 @@ export type PokemonType = (typeof POKEMON_TYPES)[number];
 
 export class TypeQueryDto {
     @ApiPropertyOptional({ enum: POKEMON_TYPES })
-    @IsOptional()
     @IsIn([...POKEMON_TYPES], { message: `First type must be one of: ${POKEMON_TYPES.join(', ')}` })
-    type?: string;
+    type!: string;
     
 
     @ApiPropertyOptional({ enum: POKEMON_TYPES })

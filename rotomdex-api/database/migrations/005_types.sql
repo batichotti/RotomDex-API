@@ -3,7 +3,8 @@ DROP TABLE IF EXISTS types;
 CREATE TABLE types (
     attack_type TEXT NOT NULL,
     defense_type TEXT NOT NULL,
-    effectiveness REAL NOT NULL
+    effectiveness REAL NOT NULL,
+    PRIMARY KEY (attack_type, defense_type)
 );
 
 INSERT INTO types VALUES ('Normal', 'Normal', 1);
@@ -160,7 +161,7 @@ INSERT INTO types VALUES ('Steel', 'Insect', 1);
 INSERT INTO types VALUES ('Steel', 'Ghost', 1);
 INSERT INTO types VALUES ('Steel', 'Steel', 0.5);
 INSERT INTO types VALUES ('Steel', 'Fire', 0.5);
-INSERT INTO types VALUES ('Steel', 'Water', 1);
+INSERT INTO types VALUES ('Steel', 'Water', 0.5);
 INSERT INTO types VALUES ('Steel', 'Grass', 1);
 INSERT INTO types VALUES ('Steel', 'Electric', 0.5);
 INSERT INTO types VALUES ('Steel', 'Psychic', 1);
@@ -234,8 +235,8 @@ INSERT INTO types VALUES ('Electric', 'Steel', 1);
 INSERT INTO types VALUES ('Electric', 'Fire', 1);
 INSERT INTO types VALUES ('Electric', 'Water', 2);
 INSERT INTO types VALUES ('Electric', 'Grass', 0.5);
-INSERT INTO types VALUES ('Electric', 'Electric', 2);
-INSERT INTO types VALUES ('Electric', 'Psychic', 0.5);
+INSERT INTO types VALUES ('Electric', 'Electric', 0.5);
+INSERT INTO types VALUES ('Electric', 'Psychic', 1);
 INSERT INTO types VALUES ('Electric', 'Ice', 1);
 INSERT INTO types VALUES ('Electric', 'Dragon', 0.5);
 INSERT INTO types VALUES ('Electric', 'Dark', 1);
@@ -268,13 +269,13 @@ INSERT INTO types VALUES ('Ice', 'Insect', 1);
 INSERT INTO types VALUES ('Ice', 'Ghost', 1);
 INSERT INTO types VALUES ('Ice', 'Steel', 0.5);
 INSERT INTO types VALUES ('Ice', 'Fire', 0.5);
-INSERT INTO types VALUES ('Ice', 'Water', 1);
-INSERT INTO types VALUES ('Ice', 'Grass', 0.5);
-INSERT INTO types VALUES ('Ice', 'Electric', 0.5);
+INSERT INTO types VALUES ('Ice', 'Water', 0.5);
+INSERT INTO types VALUES ('Ice', 'Grass', 2);
+INSERT INTO types VALUES ('Ice', 'Electric', 1);
 INSERT INTO types VALUES ('Ice', 'Psychic', 1);
-INSERT INTO types VALUES ('Ice', 'Ice', 1);
-INSERT INTO types VALUES ('Ice', 'Dragon', 0.5);
-INSERT INTO types VALUES ('Ice', 'Dark', 0.5);
+INSERT INTO types VALUES ('Ice', 'Ice', 0.5);
+INSERT INTO types VALUES ('Ice', 'Dragon', 2);
+INSERT INTO types VALUES ('Ice', 'Dark', 1);
 INSERT INTO types VALUES ('Ice', 'Fairy', 1);
 INSERT INTO types VALUES ('Dragon', 'Normal', 1);
 INSERT INTO types VALUES ('Dragon', 'Fighting', 1);
@@ -321,7 +322,7 @@ INSERT INTO types VALUES ('Fairy', 'Rock', 1);
 INSERT INTO types VALUES ('Fairy', 'Insect', 1);
 INSERT INTO types VALUES ('Fairy', 'Ghost', 1);
 INSERT INTO types VALUES ('Fairy', 'Steel', 0.5);
-INSERT INTO types VALUES ('Fairy', 'Fire', 1);
+INSERT INTO types VALUES ('Fairy', 'Fire', 0.5);
 INSERT INTO types VALUES ('Fairy', 'Water', 1);
 INSERT INTO types VALUES ('Fairy', 'Grass', 1);
 INSERT INTO types VALUES ('Fairy', 'Electric', 1);
