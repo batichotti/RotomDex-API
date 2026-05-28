@@ -10,6 +10,7 @@ import { PokemonMovesModule } from './pokemon-moves/pokemon-moves.module';
 import { PokemonAbilitiesModule } from './pokemon-abilities/pokemon-abilities.module';
 import { ItemsModule } from './items/items.module';
 import { TypesModule } from './types/types.module';
+import { NaturesModule } from './natures/natures.module';
 
 @Module({
   imports: [
@@ -45,6 +46,8 @@ import { TypesModule } from './types/types.module';
     ItemsModule,
 
     TypesModule,
+
+    NaturesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

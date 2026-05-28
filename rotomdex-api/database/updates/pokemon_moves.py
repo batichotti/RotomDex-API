@@ -111,7 +111,7 @@ def format_sql_value(value):
     return str(value)
 
 
-def save_sql(rows, filename="007_pokemon_moves.sql"):
+def save_sql(rows, filename="008_pokemon_moves.sql"):
     script_dir = os.path.dirname(os.path.abspath(__file__))
     migrations_dir = os.path.abspath(os.path.join(script_dir, "..", "migrations"))
     filepath = os.path.join(migrations_dir, filename)

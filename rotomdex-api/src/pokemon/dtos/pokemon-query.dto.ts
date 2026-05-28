@@ -1,10 +1,10 @@
-import { IsOptional, IsIn, IsEnum, IsInt, Min, IsBoolean, Validate, ValidatorConstraint, ValidatorConstraintInterface, ValidationArguments } from 'class-validator';
+import { IsOptional, IsIn, IsEnum, IsInt, Min, IsBoolean } from 'class-validator';
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 
 const POKEMON_TYPES = ['bug', 'dark', 'dragon', 'electric', 'fairy', 'fighting', 'fire', 'flying', 'ghost', 'grass', 'ground', 'ice', 'normal', 'poison', 'psychic', 'rock', 'steel', 'water'] as const;
-const POKEMON_ATTRIBUTES = ['attack', 'bst', 'defense', 'hp', 'id', 'species_id', 'name', 'special_attack', 'special_defense', 'speed', 'height', 'weight'] as const;
-const POKEMON_ATTRIBUTES_TO_FILL = ['attack', 'bst', 'defense', 'hp', 'id', 'species_id', 'special_attack', 'special_defense', 'speed', 'height', 'weight'] as const;
+const POKEMON_ATTRIBUTES = ['hp', 'id', 'species_id', 'name', 'bst', 'attack', 'defense', 'special_attack', 'special_defense', 'speed', 'height', 'weight'] as const;
+const POKEMON_ATTRIBUTES_TO_FILL = ['hp', 'id', 'species_id', 'bst', 'attack', 'defense', 'special_attack', 'special_defense', 'speed', 'height', 'weight'] as const;
 
 export class PokemonQueryDto {
     @ApiPropertyOptional({ enum: POKEMON_TYPES })
