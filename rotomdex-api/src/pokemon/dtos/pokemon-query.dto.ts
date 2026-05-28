@@ -3,8 +3,8 @@ import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 
 const POKEMON_TYPES = ['bug', 'dark', 'dragon', 'electric', 'fairy', 'fighting', 'fire', 'flying', 'ghost', 'grass', 'ground', 'ice', 'normal', 'poison', 'psychic', 'rock', 'steel', 'water'] as const;
-const POKEMON_ATTRIBUTES = ['hp', 'id', 'species_id', 'name', 'bst', 'attack', 'defense', 'special_attack', 'special_defense', 'speed', 'height', 'weight'] as const;
-const POKEMON_ATTRIBUTES_TO_FILL = ['hp', 'id', 'species_id', 'bst', 'attack', 'defense', 'special_attack', 'special_defense', 'speed', 'height', 'weight'] as const;
+const POKEMON_ATTRIBUTES = ['id', 'species_id', 'name', 'bst', 'hp', 'attack', 'defense', 'special_attack', 'special_defense', 'speed', 'height', 'weight'] as const;
+const POKEMON_ATTRIBUTES_TO_FILL = ['id', 'species_id', 'bst', 'hp', 'attack', 'defense', 'special_attack', 'special_defense', 'speed', 'height', 'weight'] as const;
 
 export class PokemonQueryDto {
     @ApiPropertyOptional({ enum: POKEMON_TYPES })
