@@ -3,6 +3,7 @@ import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 
 const POKEMON_TYPES = ['bug', 'dark', 'dragon', 'electric', 'fairy', 'fighting', 'fire', 'flying', 'ghost', 'grass', 'ground', 'ice', 'normal', 'poison', 'psychic', 'rock', 'steel', 'water'] as const;
+const POKEMON_TYPES2 = ['bug', 'dark', 'dragon', 'electric', 'fairy', 'fighting', 'fire', 'flying', 'ghost', 'grass', 'ground', 'ice', 'normal', 'poison', 'psychic', 'rock', 'steel', 'water', 'None'] as const;
 const POKEMON_ATTRIBUTES = ['id', 'species_id', 'name', 'bst', 'hp', 'attack', 'defense', 'special_attack', 'special_defense', 'speed', 'height', 'weight'] as const;
 const POKEMON_ATTRIBUTES_TO_FILL = ['id', 'species_id', 'bst', 'hp', 'attack', 'defense', 'special_attack', 'special_defense', 'speed', 'height', 'weight'] as const;
 
@@ -12,9 +13,9 @@ export class PokemonQueryDto {
     @IsIn([...POKEMON_TYPES], { message: `First type must be one of: ${POKEMON_TYPES.join(', ')}` })
     type?: string;
 
-    @ApiPropertyOptional({ enum: POKEMON_TYPES })
+    @ApiPropertyOptional({ enum: POKEMON_TYPES2 })
     @IsOptional()
-    @IsIn([...POKEMON_TYPES], { message: `Second type must be one of: ${POKEMON_TYPES.join(', ')}` })
+    @IsIn([...POKEMON_TYPES2], { message: `Second type must be one of: ${POKEMON_TYPES2.join(', ')}` })
     type2?: string;
 
     @ApiPropertyOptional({ minimum: 1, type: Number })
