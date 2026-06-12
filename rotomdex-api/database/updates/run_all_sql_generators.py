@@ -12,7 +12,8 @@ GENERATORS = [
 	"abilities.py",
 	"items.py",
 	"types.py",
-	"natures.py"
+	"natures.py",
+	#"evolutions.py", # <- This guy dont take regional forms, we fixed it manually at the .sql file
 	"pokemon_abilities.py",
 	"pokemon_moves.py",
 ]
