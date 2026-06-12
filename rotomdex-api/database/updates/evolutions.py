@@ -1,3 +1,4 @@
+# <- This guy dont take regional forms, we fixed it manually at the .sql file
 import os
 import time
 from dataclasses import astuple, dataclass
