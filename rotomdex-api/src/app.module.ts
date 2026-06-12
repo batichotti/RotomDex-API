@@ -11,6 +11,7 @@ import { PokemonAbilitiesModule } from './pokemon-abilities/pokemon-abilities.mo
 import { ItemsModule } from './items/items.module';
 import { TypesModule } from './types/types.module';
 import { NaturesModule } from './natures/natures.module';
+import { EvolutionsModule } from './evolutions/evolutions.module';
 
 @Module({
   imports: [
@@ -48,6 +49,8 @@ import { NaturesModule } from './natures/natures.module';
     TypesModule,
 
     NaturesModule,
+
+    EvolutionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -13,6 +13,7 @@ GENERATORS = [
 	"items.py",
 	"types.py",
 	"natures.py"
+	"evolutions.py",
 	"pokemon_abilities.py",
 	"pokemon_moves.py",
 ]
