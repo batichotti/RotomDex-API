@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS pokemon_abilities;
+DROP TABLE IF EXISTS pokemon_abilities CASCADE;
 
 CREATE TABLE pokemon_abilities (
     pokemon_id INTEGER NOT NULL,
