@@ -18,7 +18,7 @@ export class EvolutionsService {
     if (query.pokemon_id) qb.andWhere({ pokemon_id: query.pokemon_id });
     if (query.evolution_stage) qb.andWhere({ evolution_stage: query.evolution_stage });
     if (query.evolves_from_id) qb.andWhere({ evolves_from_id: query.evolves_from_id });
-    if (query.is_fully_evolved) qb.andWhere({ is_fully_evolved: query.is_fully_evolved });
+    if (query.is_fully_evolved !== undefined) qb.andWhere('pokemon_evolutions.is_fully_evolved = :is_fully_evolved', { is_fully_evolved: query.is_fully_evolved });
     if (query.evolution_method) qb.andWhere({ evolution_method: ILike(`%${query.evolution_method}%`) });
 
     return qb.getMany();
@@ -79,5 +79,5 @@ export class EvolutionsService {
     `,
       [root.pokemon_id],
     );
-  }
+  }cd
 }

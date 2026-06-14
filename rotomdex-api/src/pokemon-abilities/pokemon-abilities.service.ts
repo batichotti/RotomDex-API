@@ -64,7 +64,7 @@ export class PokemonAbilitiesService {
         )
       .where('pokemon_ability.ability_id = :id', { id });
   
-    if (query.is_hidden) qb.andWhere('pokemon_ability.is_hidden = :is_hidden', { is_hidden: query.is_hidden });
+    if (query.is_hidden !== undefined ) qb.andWhere('pokemon_ability.is_hidden = :is_hidden', { is_hidden: query.is_hidden });
 
     if (query.fill) {
       if (query.min !== undefined && query.max !== undefined) {

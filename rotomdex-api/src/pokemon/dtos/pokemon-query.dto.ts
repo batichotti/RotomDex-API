@@ -1,11 +1,18 @@
 import { IsOptional, IsIn, IsEnum, IsInt, Min, IsBoolean } from 'class-validator';
 import { ApiPropertyOptional } from '@nestjs/swagger';
-import { Type } from 'class-transformer';
+import { Type, Transform } from 'class-transformer';
 
 const POKEMON_TYPES = ['bug', 'dark', 'dragon', 'electric', 'fairy', 'fighting', 'fire', 'flying', 'ghost', 'grass', 'ground', 'ice', 'normal', 'poison', 'psychic', 'rock', 'steel', 'water'] as const;
 const POKEMON_TYPES2 = ['bug', 'dark', 'dragon', 'electric', 'fairy', 'fighting', 'fire', 'flying', 'ghost', 'grass', 'ground', 'ice', 'normal', 'poison', 'psychic', 'rock', 'steel', 'water', 'None'] as const;
 const POKEMON_ATTRIBUTES = ['id', 'species_id', 'name', 'bst', 'hp', 'attack', 'defense', 'special_attack', 'special_defense', 'speed', 'height', 'weight'] as const;
 const POKEMON_ATTRIBUTES_TO_FILL = ['id', 'species_id', 'bst', 'hp', 'attack', 'defense', 'special_attack', 'special_defense', 'speed', 'height', 'weight'] as const;
+
+const toBoolean = () =>
+  Transform(({ value }) => {
+    if (value === 'true'  || value === true  || value === 1 || value === '1') return true;
+    if (value === 'false' || value === false || value === 0 || value === '0') return false;
+    return undefined;
+  });
 
 export class PokemonQueryDto {
     @ApiPropertyOptional({ enum: POKEMON_TYPES })
@@ -49,49 +56,49 @@ export class PokemonQueryDto {
 
     @ApiPropertyOptional({ type: Boolean })
     @IsOptional()
-    @Type(() => Boolean)
+    @toBoolean()
     @IsBoolean()
     isLegendary?: boolean;
 
     @ApiPropertyOptional({ type: Boolean })
     @IsOptional()
-    @Type(() => Boolean)
+    @toBoolean()
     @IsBoolean()
     isMythical?: boolean;
 
     @ApiPropertyOptional({ type: Boolean })
     @IsOptional()
-    @Type(() => Boolean)
+    @toBoolean()
     @IsBoolean()
     isBaby?: boolean;
 
     @ApiPropertyOptional({ type: Boolean })
     @IsOptional()
-    @Type(() => Boolean)
+    @toBoolean()
     @IsBoolean()
     hasGenderDifferences?: boolean;
 
     @ApiPropertyOptional({ type: Boolean })
     @IsOptional()
-    @Type(() => Boolean)
+    @toBoolean()
     @IsBoolean()
     formsSwitchable?: boolean;
 
     @ApiPropertyOptional({ type: Boolean })
     @IsOptional()
-    @Type(() => Boolean)
+    @toBoolean()
     @IsBoolean()
     isMega?: boolean;
 
     @ApiPropertyOptional({ type: Boolean })
     @IsOptional()
-    @Type(() => Boolean)
+    @toBoolean()
     @IsBoolean()
     isGmax?: boolean;
 
     @ApiPropertyOptional({ type: Boolean })
     @IsOptional()
-    @Type(() => Boolean)
+    @toBoolean()
     @IsBoolean()
     isRegionalForm?: boolean;
 }
