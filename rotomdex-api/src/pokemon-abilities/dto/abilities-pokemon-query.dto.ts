@@ -6,14 +6,16 @@ const POKEMON_TYPES = ['bug', 'dark', 'dragon', 'electric', 'fairy', 'fighting',
 const POKEMON_ATTRIBUTES = ['attack', 'bst', 'defense', 'hp', 'id', 'name', 'special_attack', 'special_defense', 'speed', 'height', 'weight'] as const;
 const POKEMON_ATTRIBUTES_TO_FILL = ['attack', 'bst', 'defense', 'hp', 'id', 'special_attack', 'special_defense', 'speed', 'height', 'weight'] as const;
 
+const toBoolean = () =>
+  Transform(({ value }) => {
+    if (value === 'true'  || value === true  || value === 1 || value === '1') return true;
+    if (value === 'false' || value === false || value === 0 || value === '0') return false;
+    return undefined;
+  });
 export class AbilitiesPokemonDto{
-    @ApiPropertyOptional({ type: Boolean, description: 'Filtra por hidden (true/false)' })
+    @ApiPropertyOptional({ type: Boolean })
     @IsOptional()
-    @Transform(({ value }) => {
-        if (value === true || value === 'true') return true;
-        if (value === false || value === 'false') return false;
-        return value;
-    })
+    @toBoolean()
     @IsBoolean({ message: 'is_hidden must be true or false' })
     is_hidden?: boolean;
 
