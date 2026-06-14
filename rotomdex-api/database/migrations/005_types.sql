@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS types;
+DROP TABLE IF EXISTS types CASCADE;
 
 CREATE TABLE types (
     attack_type TEXT NOT NULL,

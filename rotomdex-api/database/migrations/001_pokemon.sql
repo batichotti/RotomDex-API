@@ -707,7 +707,9 @@ INSERT INTO pokemon VALUES (674, 'pancham', 674, 'pancham', 'generation-vi', FAL
 INSERT INTO pokemon VALUES (675, 'pangoro', 675, 'pangoro', 'generation-vi', FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, 'ground', 'humanshape', 'fighting', 'dark', 95, 124, 78, 69, 71, 58, 495, 210, 136.0, 173);
 INSERT INTO pokemon VALUES (676, 'furfrou', 676, 'furfrou', 'generation-vi', FALSE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, 'ground', 'None', 'normal', 'None', 75, 80, 60, 65, 90, 102, 472, 120, 28.0, 165);
 INSERT INTO pokemon VALUES (677, 'espurr', 677, 'espurr', 'generation-vi', FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, 'ground', 'None', 'psychic', 'None', 62, 48, 54, 63, 60, 68, 355, 30, 3.5, 71);
-INSERT INTO pokemon VALUES (678, 'meowstic-male', 678, 'meowstic', 'generation-vi', FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, FALSE, 'ground', 'None', 'psychic', 'None', 74, 48, 76, 83, 81, 104, 466, 60, 8.5, 163);
+INSERT INTO pokemon VALUES (678, 'meowstic-male', 678, '
+
+ic', 'generation-vi', FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, FALSE, 'ground', 'None', 'psychic', 'None', 74, 48, 76, 83, 81, 104, 466, 60, 8.5, 163);
 INSERT INTO pokemon VALUES (679, 'honedge', 679, 'honedge', 'generation-vi', FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, 'mineral', 'None', 'steel', 'ghost', 45, 80, 100, 35, 37, 28, 325, 80, 2.0, 65);
 INSERT INTO pokemon VALUES (680, 'doublade', 680, 'doublade', 'generation-vi', FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, 'mineral', 'None', 'steel', 'ghost', 59, 110, 150, 45, 49, 35, 448, 80, 4.5, 157);
 INSERT INTO pokemon VALUES (681, 'aegislash-shield', 681, 'aegislash', 'generation-vi', FALSE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, 'mineral', 'None', 'steel', 'ghost', 60, 50, 140, 50, 140, 60, 500, 170, 53.0, 234);
@@ -1055,6 +1057,8 @@ INSERT INTO pokemon VALUES (1022, 'iron-boulder', 1022, 'iron-boulder', 'generat
 INSERT INTO pokemon VALUES (1023, 'iron-crown', 1023, 'iron-crown', 'generation-ix', FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, 'no-eggs', 'None', 'steel', 'psychic', 90, 72, 100, 122, 108, 98, 590, 160, 156.0, 295);
 INSERT INTO pokemon VALUES (1024, 'terapagos', 1024, 'terapagos', 'generation-ix', TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, 'no-eggs', 'None', 'normal', 'None', 90, 65, 85, 65, 85, 60, 450, 20, 6.5, 90);
 INSERT INTO pokemon VALUES (1025, 'pecharunt', 1025, 'pecharunt', 'generation-ix', FALSE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, 'no-eggs', 'None', 'poison', 'ghost', 88, 88, 160, 88, 88, 88, 600, 30, 0.3, 300);
+INSERT INTO pokemon VALUES (9998, 'burmy-sandy', 412, 'burmy', 'generation-iv', FALSE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, 'bug', 'None', 'bug', 'None', 40, 29, 45, 29, 45, 36, 224, 20, 3.4, 45);
+INSERT INTO pokemon VALUES (9999, 'burmy-trash', 412, 'burmy', 'generation-iv', FALSE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, 'bug', 'None', 'bug', 'None', 40, 29, 45, 29, 45, 36, 224, 20, 3.4, 45);
 INSERT INTO pokemon VALUES (10001, 'deoxys-attack', 386, 'deoxys', 'generation-iii', FALSE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, 'no-eggs', 'None', 'psychic', 'None', 50, 180, 20, 180, 20, 150, 600, 170, 60.8, 270);
 INSERT INTO pokemon VALUES (10002, 'deoxys-defense', 386, 'deoxys', 'generation-iii', FALSE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, 'no-eggs', 'None', 'psychic', 'None', 50, 70, 160, 70, 160, 90, 600, 170, 60.8, 270);
 INSERT INTO pokemon VALUES (10003, 'deoxys-speed', 386, 'deoxys', 'generation-iii', FALSE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, 'no-eggs', 'None', 'psychic', 'None', 50, 95, 90, 95, 90, 180, 600, 170, 60.8, 270);

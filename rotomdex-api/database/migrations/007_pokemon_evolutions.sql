@@ -267,7 +267,7 @@ INSERT INTO pokemon_evolutions VALUES ('farigiraf', 981, 981, 'girafarig', 203, 
 INSERT INTO pokemon_evolutions VALUES ('pineco', 204, 204, NULL, NULL, NULL, '', 1, FALSE);
 INSERT INTO pokemon_evolutions VALUES ('forretress', 205, 205, 'pineco', 204, 204, 'level-up | level=31', 2, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('dunsparce', 206, 206, NULL, NULL, NULL, '', 1, FALSE);
-INSERT INTO pokemon_evolutions VALUES ('dudunsparce', NULL, NULL, 'dunsparce', NULL, NULL, 'level-up | move=hyper-drill', 2, TRUE);
+INSERT INTO pokemon_evolutions VALUES ('dudunsparce', 982, 982, 'dunsparce', 206, 206, 'level-up | move=hyper-drill', 2, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('gligar', 207, 207, NULL, NULL, NULL, '', 1, FALSE);
 INSERT INTO pokemon_evolutions VALUES ('gliscor', 472, 472, 'gligar', 207, 207, 'level-up | held_item=razor-fang | time=night', 2, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('snubbull', 209, 209, NULL, NULL, NULL, '', 1, FALSE);
@@ -494,7 +494,11 @@ INSERT INTO pokemon_evolutions VALUES ('rampardos', 409, 409, 'cranidos', 408, 4
 INSERT INTO pokemon_evolutions VALUES ('shieldon', 410, 410, NULL, NULL, NULL, '', 1, FALSE);
 INSERT INTO pokemon_evolutions VALUES ('bastiodon', 411, 411, 'shieldon', 410, 410, 'level-up | level=30', 2, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('burmy', 412, 412, NULL, NULL, NULL, '', 1, FALSE);
-INSERT INTO pokemon_evolutions VALUES ('wormadam', NULL, NULL, 'burmy', NULL, NULL, 'level-up | level=20 | gender=1', 2, TRUE);
+INSERT INTO pokemon_evolutions VALUES ('burmy-sandy', 9998, 412, NULL, NULL, NULL, '', 1, FALSE);
+INSERT INTO pokemon_evolutions VALUES ('burmy-trash', 9999, 412, NULL, NULL, NULL, '', 1, FALSE);
+INSERT INTO pokemon_evolutions VALUES ('wormadam-plant', 413, 413, 'burmy', 412, 412, 'level-up | level=20 | gender=1 | location=grass', 2, TRUE);
+INSERT INTO pokemon_evolutions VALUES ('wormadam-sandy', 10004, 413, 'burmy-sandy', 9998, 412, 'level-up | level=20 | gender=1 | location=caves', 2, TRUE);
+INSERT INTO pokemon_evolutions VALUES ('wormadam-trash', 10005, 413, 'burmy-trash', 9999, 412, 'level-up | level=20 | gender=1 | location=buildings', 2, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('mothim', 414, 414, 'burmy', 412, 412, 'level-up | level=20 | gender=2', 2, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('combee', 415, 415, NULL, NULL, NULL, '', 1, FALSE);
 INSERT INTO pokemon_evolutions VALUES ('vespiquen', 416, 416, 'combee', 415, 415, 'level-up | level=21 | gender=1', 2, TRUE);
@@ -738,7 +742,7 @@ INSERT INTO pokemon_evolutions VALUES ('scatterbug', 664, 664, NULL, NULL, NULL,
 INSERT INTO pokemon_evolutions VALUES ('spewpa', 665, 665, 'scatterbug', 664, 664, 'level-up | level=9', 2, FALSE);
 INSERT INTO pokemon_evolutions VALUES ('vivillon', 666, 666, 'spewpa', 665, 665, 'level-up | level=12', 3, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('litleo', 667, 667, NULL, NULL, NULL, '', 1, FALSE);
-INSERT INTO pokemon_evolutions VALUES ('pyroar', NULL, NULL, 'litleo', NULL, NULL, 'level-up | level=35', 2, TRUE);
+INSERT INTO pokemon_evolutions VALUES ('pyroar', 668, 668, 'litleo', 667, 667, 'level-up | level=35', 2, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('flabebe', 669, 669, NULL, NULL, NULL, '', 1, FALSE);
 INSERT INTO pokemon_evolutions VALUES ('floette', 670, 670, 'flabebe', 669, 669, 'level-up | level=19', 2, FALSE);
 INSERT INTO pokemon_evolutions VALUES ('florges', 671, 671, 'floette', 670, 670, 'use-item | item=shiny-stone', 3, TRUE);
@@ -748,10 +752,12 @@ INSERT INTO pokemon_evolutions VALUES ('pancham', 674, 674, NULL, NULL, NULL, ''
 INSERT INTO pokemon_evolutions VALUES ('pangoro', 675, 675, 'pancham', 674, 674, 'level-up | level=32', 2, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('furfrou', 676, 676, NULL, NULL, NULL, '', 1, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('espurr', 677, 677, NULL, NULL, NULL, '', 1, FALSE);
-INSERT INTO pokemon_evolutions VALUES ('meowstic', NULL, NULL, 'espurr', NULL, NULL, 'level-up | level=25', 2, TRUE);
+INSERT INTO pokemon_evolutions VALUES ('meowstic-male', 678, 678, 'espurr', 677, 677, 'level-up | level=25 | gender=2', 2, TRUE);
+INSERT INTO pokemon_evolutions VALUES ('meowstic-female', 10025, 678, 'espurr', 677, 677, 'level-up | level=25 | gender=1', 2, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('honedge', 679, 679, NULL, NULL, NULL, '', 1, FALSE);
 INSERT INTO pokemon_evolutions VALUES ('doublade', 680, 680, 'honedge', 679, 679, 'level-up | level=35', 2, FALSE);
-INSERT INTO pokemon_evolutions VALUES ('aegislash', NULL, NULL, 'doublade', NULL, NULL, 'use-item | item=dusk-stone', 3, TRUE);
+INSERT INTO pokemon_evolutions VALUES ('aegislash-shield', 681, 681, 'doublade', 680, 680, 'use-item | item=dusk-stone', 3, TRUE);
+INSERT INTO pokemon_evolutions VALUES ('aegislash-blade', 10026, 681, 'doublade', 680, 680, 'use-item | item=dusk-stone', 3, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('spritzee', 682, 682, NULL, NULL, NULL, '', 1, FALSE);
 INSERT INTO pokemon_evolutions VALUES ('aromatisse', 683, 683, 'spritzee', 682, 682, 'trade | held_item=sachet', 2, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('swirlix', 684, 684, NULL, NULL, NULL, '', 1, FALSE);
@@ -814,7 +820,9 @@ INSERT INTO pokemon_evolutions VALUES ('crabominable', 740, 740, 'crabrawler', 7
 INSERT INTO pokemon_evolutions VALUES ('cutiefly', 742, 742, NULL, NULL, NULL, '', 1, FALSE);
 INSERT INTO pokemon_evolutions VALUES ('ribombee', 743, 743, 'cutiefly', 742, 742, 'level-up | level=25', 2, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('rockruff', 744, 744, NULL, NULL, NULL, '', 1, FALSE);
-INSERT INTO pokemon_evolutions VALUES ('lycanroc', NULL, NULL, 'rockruff', NULL, NULL, 'level-up | level=25 | time=day', 2, TRUE);
+INSERT INTO pokemon_evolutions VALUES ('lycanroc-midday', 745, 745, 'rockruff', 744, 744, 'level-up | level=25 | time=day', 2, TRUE);
+INSERT INTO pokemon_evolutions VALUES ('lycanroc-midnight', 10126, 745, 'rockruff', 744, 744, 'level-up | level=25 | time=night', 2, TRUE);
+INSERT INTO pokemon_evolutions VALUES ('lycanroc-dusk', 10152, 745, 'rockruff', 744, 744, 'level-up | level=25 | time=dusk | ability=own-tempo', 2, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('mareanie', 747, 747, NULL, NULL, NULL, '', 1, FALSE);
 INSERT INTO pokemon_evolutions VALUES ('toxapex', 748, 748, 'mareanie', 747, 747, 'level-up | level=38', 2, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('mudbray', 749, 749, NULL, NULL, NULL, '', 1, FALSE);
@@ -917,7 +925,8 @@ INSERT INTO pokemon_evolutions VALUES ('cramorant', 845, 845, NULL, NULL, NULL, 
 INSERT INTO pokemon_evolutions VALUES ('arrokuda', 846, 846, NULL, NULL, NULL, '', 1, FALSE);
 INSERT INTO pokemon_evolutions VALUES ('barraskewda', 847, 847, 'arrokuda', 846, 846, 'level-up | level=26', 2, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('toxel', 848, 848, NULL, NULL, NULL, '', 1, FALSE);
-INSERT INTO pokemon_evolutions VALUES ('toxtricity', NULL, NULL, 'toxel', NULL, NULL, 'level-up | level=30', 2, TRUE);
+INSERT INTO pokemon_evolutions VALUES ('toxtricity-amped', 849, 849, 'toxel', 848, 848, 'level-up | level=30 | natures=amped', 2, TRUE);
+INSERT INTO pokemon_evolutions VALUES ('toxtricity-low-key', 10184, 849, 'toxel', 848, 848, 'level-up | level=30 | natures=low-key', 2, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('sizzlipede', 850, 850, NULL, NULL, NULL, '', 1, FALSE);
 INSERT INTO pokemon_evolutions VALUES ('centiskorch', 851, 851, 'sizzlipede', 850, 850, 'level-up | level=28', 2, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('clobbopus', 852, 852, NULL, NULL, NULL, '', 1, FALSE);
@@ -952,7 +961,8 @@ INSERT INTO pokemon_evolutions VALUES ('zacian', 888, 888, NULL, NULL, NULL, '',
 INSERT INTO pokemon_evolutions VALUES ('zamazenta', 889, 889, NULL, NULL, NULL, '', 1, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('eternatus', 890, 890, NULL, NULL, NULL, '', 1, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('kubfu', 891, 891, NULL, NULL, NULL, '', 1, FALSE);
-INSERT INTO pokemon_evolutions VALUES ('urshifu', NULL, NULL, 'kubfu', NULL, NULL, 'tower-of-darkness', 2, TRUE);
+INSERT INTO pokemon_evolutions VALUES ('urshifu-single-strike', 892, 892, 'kubfu', 891, 891, 'use-item | item=scroll-of-darkness', 2, TRUE);
+INSERT INTO pokemon_evolutions VALUES ('urshifu-rapid-strike', 10191, 892, 'kubfu', 891, 891, 'use-item | item=scroll-of-waters', 2, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('zarude', 893, 893, NULL, NULL, NULL, '', 1, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('regieleki', 894, 894, NULL, NULL, NULL, '', 1, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('regidrago', 895, 895, NULL, NULL, NULL, '', 1, TRUE);
@@ -969,7 +979,8 @@ INSERT INTO pokemon_evolutions VALUES ('quaxly', 912, 912, NULL, NULL, NULL, '',
 INSERT INTO pokemon_evolutions VALUES ('quaxwell', 913, 913, 'quaxly', 912, 912, 'level-up | level=16', 2, FALSE);
 INSERT INTO pokemon_evolutions VALUES ('quaquaval', 914, 914, 'quaxwell', 913, 913, 'level-up | level=36', 3, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('lechonk', 915, 915, NULL, NULL, NULL, '', 1, FALSE);
-INSERT INTO pokemon_evolutions VALUES ('oinkologne', NULL, NULL, 'lechonk', NULL, NULL, 'level-up | level=18', 2, TRUE);
+INSERT INTO pokemon_evolutions VALUES ('oinkologne-male', 916, 916, 'lechonk', 915, 915, 'level-up | level=18 | gender=2', 2, TRUE);
+INSERT INTO pokemon_evolutions VALUES ('oinkologne-female', 10254, 916, 'lechonk', 915, 915, 'level-up | level=18 | gender=1', 2, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('tarountula', 917, 917, NULL, NULL, NULL, '', 1, FALSE);
 INSERT INTO pokemon_evolutions VALUES ('spidops', 918, 918, 'tarountula', 917, 917, 'level-up | level=15', 2, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('nymble', 919, 919, NULL, NULL, NULL, '', 1, FALSE);
@@ -978,7 +989,8 @@ INSERT INTO pokemon_evolutions VALUES ('pawmi', 921, 921, NULL, NULL, NULL, '', 
 INSERT INTO pokemon_evolutions VALUES ('pawmo', 922, 922, 'pawmi', 921, 921, 'level-up | level=18', 2, FALSE);
 INSERT INTO pokemon_evolutions VALUES ('pawmot', 923, 923, 'pawmo', 922, 922, 'level-up', 3, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('tandemaus', 924, 924, NULL, NULL, NULL, '', 1, FALSE);
-INSERT INTO pokemon_evolutions VALUES ('maushold', NULL, NULL, 'tandemaus', NULL, NULL, 'other | level=25', 2, TRUE);
+INSERT INTO pokemon_evolutions VALUES ('maushold-family-of-four', 925, 925, 'tandemaus', 924, 924, 'level=25', 2, TRUE);
+INSERT INTO pokemon_evolutions VALUES ('maushold-family-of-three', 10257, 925, 'tandemaus', 924, 924, 'level=25 | rare', 2, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('fidough', 926, 926, NULL, NULL, NULL, '', 1, FALSE);
 INSERT INTO pokemon_evolutions VALUES ('dachsbun', 927, 927, 'fidough', 926, 926, 'level-up | level=26', 2, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('smoliv', 928, 928, NULL, NULL, NULL, '', 1, FALSE);
@@ -1016,7 +1028,7 @@ INSERT INTO pokemon_evolutions VALUES ('wiglett', 960, 960, NULL, NULL, NULL, ''
 INSERT INTO pokemon_evolutions VALUES ('wugtrio', 961, 961, 'wiglett', 960, 960, 'level-up | level=26', 2, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('bombirdier', 962, 962, NULL, NULL, NULL, '', 1, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('finizen', 963, 963, NULL, NULL, NULL, '', 1, FALSE);
-INSERT INTO pokemon_evolutions VALUES ('palafin', NULL, NULL, 'finizen', NULL, NULL, 'level-up | level=38', 2, TRUE);
+INSERT INTO pokemon_evolutions VALUES ('palafin-zero', 964, 964, 'finizen', 963, 963, 'level-up | level=38', 2, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('varoom', 965, 965, NULL, NULL, NULL, '', 1, FALSE);
 INSERT INTO pokemon_evolutions VALUES ('revavroom', 966, 966, 'varoom', 965, 965, 'level-up | level=40', 2, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('cyclizar', 967, 967, NULL, NULL, NULL, '', 1, TRUE);
