@@ -78,7 +78,7 @@ export class PokemonService {
     }
 
     if (query.generation) {
-      qb.andWhere('pokemon.generation ILIKE :generation', { generation: `%${query.generation}%` });
+      qb.andWhere('pokemon.generation = :generation', { generation: query.generation });
     }
 
     if (query.eggGroup1 && query.eggGroup2) {
