@@ -2,7 +2,7 @@ import { Controller, Get, Param, Query } from '@nestjs/common';
 import { EvolutionsService } from './evolutions.service';
 import { EvolutionsQueryDto } from './dto/evolutions-query.dto';
 
-@Controller('pokemon_evolutions')
+@Controller('pokemon-evolutions')
 export class EvolutionsController {
   constructor(private readonly evolutionsService: EvolutionsService) {}
 
