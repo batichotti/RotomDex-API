@@ -526,7 +526,7 @@ INSERT INTO pokemon_evolutions VALUES ('sudowoodo', 185, 185, 'bonsly', 438, 438
 INSERT INTO pokemon_evolutions VALUES ('mime-jr', 439, 439, NULL, NULL, NULL, '', 1, FALSE);
 INSERT INTO pokemon_evolutions VALUES ('mr-mime', 122, 122, 'mime-jr', 439, 439, 'level-up | move=mimic', 2, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('mr-mime-galar', 10168, 122, 'mime-jr', 439, 439, 'level-up | move=mimic | location=galar', 2, FALSE);
-INSERT INTO pokemon_evolutions VALUES ('mr-rime', 866, 866, 'mr-mime', 122, 122, 'level-up | level=42', 3, TRUE);
+INSERT INTO pokemon_evolutions VALUES ('mr-rime', 866, 866, 'mr-mime-galar', 10168, 122, 'level-up | level=42', 3, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('happiny', 440, 440, NULL, NULL, NULL, '', 1, FALSE);
 INSERT INTO pokemon_evolutions VALUES ('chansey', 113, 113, 'happiny', 440, 440, 'level-up | held_item=oval-stone | time=day', 2, FALSE);
 INSERT INTO pokemon_evolutions VALUES ('blissey', 242, 242, 'chansey', 113, 113, 'level-up | high-friendship', 3, TRUE);
