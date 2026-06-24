@@ -114,9 +114,17 @@ CREATE TABLE pokemon_abilities (
         f.write("\n")
         f.write("\n".join(insert_statements))
         f.write("\n")
+        
+    f.write(
+    """
+        INSERT INTO pokemon_abilities VALUES (9999, 'burmy-trash', 'shed-skin', 61, 1, FALSE);
+        INSERT INTO pokemon_abilities VALUES (9998, 'burmy-sandy', 'shed-skin', 61, 1, FALSE);
+        INSERT INTO pokemon_abilities VALUES (9999, 'burmy-trash', 'overcoat', 142, 3, TRUE);
+        INSERT INTO pokemon_abilities VALUES (9998, 'burmy-sandy', 'overcoat', 142, 3, TRUE);
+    """
+    )
 
     print(f"\nSQL salvo em: {filepath}")
-
 
 if __name__ == "__main__":
     rows = build_rows()
