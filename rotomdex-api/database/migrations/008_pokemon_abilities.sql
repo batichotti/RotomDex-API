@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS pokemon_abilities CASCADE;
+DROP TABLE IF EXISTS pokemon_abilities;
 
 CREATE TABLE pokemon_abilities (
     pokemon_id INTEGER NOT NULL,
@@ -445,6 +445,7 @@ INSERT INTO pokemon_abilities VALUES (10252, 'tauros-paldea-aqua-breed', 'intimi
 INSERT INTO pokemon_abilities VALUES (10260, 'squawkabilly-blue-plumage', 'intimidate', 22, 1, FALSE);
 INSERT INTO pokemon_abilities VALUES (10261, 'squawkabilly-yellow-plumage', 'intimidate', 22, 1, FALSE);
 INSERT INTO pokemon_abilities VALUES (10262, 'squawkabilly-white-plumage', 'intimidate', 22, 1, FALSE);
+INSERT INTO pokemon_abilities VALUES (10289, 'scrafty-mega', 'intimidate', 22, 1, FALSE);
 INSERT INTO pokemon_abilities VALUES (202, 'wobbuffet', 'shadow-tag', 23, 1, FALSE);
 INSERT INTO pokemon_abilities VALUES (360, 'wynaut', 'shadow-tag', 23, 1, FALSE);
 INSERT INTO pokemon_abilities VALUES (574, 'gothita', 'shadow-tag', 23, 3, TRUE);
@@ -1171,6 +1172,8 @@ INSERT INTO pokemon_abilities VALUES (268, 'cascoon', 'shed-skin', 61, 1, FALSE)
 INSERT INTO pokemon_abilities VALUES (336, 'seviper', 'shed-skin', 61, 1, FALSE);
 INSERT INTO pokemon_abilities VALUES (401, 'kricketot', 'shed-skin', 61, 1, FALSE);
 INSERT INTO pokemon_abilities VALUES (412, 'burmy', 'shed-skin', 61, 1, FALSE);
+INSERT INTO pokemon_abilities VALUES (9999, 'burmy-trash', 'shed-skin', 61, 1, FALSE);
+INSERT INTO pokemon_abilities VALUES (9998, 'burmy-sandy', 'shed-skin', 61, 1, FALSE);
 INSERT INTO pokemon_abilities VALUES (559, 'scraggy', 'shed-skin', 61, 1, FALSE);
 INSERT INTO pokemon_abilities VALUES (560, 'scrafty', 'shed-skin', 61, 1, FALSE);
 INSERT INTO pokemon_abilities VALUES (588, 'karrablast', 'shed-skin', 61, 2, FALSE);
@@ -1428,6 +1431,7 @@ INSERT INTO pokemon_abilities VALUES (10204, 'lapras-gmax', 'shell-armor', 75, 2
 INSERT INTO pokemon_abilities VALUES (10214, 'drednaw-gmax', 'shell-armor', 75, 2, FALSE);
 INSERT INTO pokemon_abilities VALUES (10241, 'sliggoo-hisui', 'shell-armor', 75, 2, FALSE);
 INSERT INTO pokemon_abilities VALUES (10242, 'goodra-hisui', 'shell-armor', 75, 2, FALSE);
+INSERT INTO pokemon_abilities VALUES (10288, 'scolipede-mega', 'shell-armor', 75, 1, FALSE);
 INSERT INTO pokemon_abilities VALUES (384, 'rayquaza', 'air-lock', 76, 1, FALSE);
 INSERT INTO pokemon_abilities VALUES (16, 'pidgey', 'tangled-feet', 77, 2, FALSE);
 INSERT INTO pokemon_abilities VALUES (17, 'pidgeotto', 'tangled-feet', 77, 2, FALSE);
@@ -1719,6 +1723,7 @@ INSERT INTO pokemon_abilities VALUES (10073, 'pidgeot-mega', 'no-guard', 99, 1, 
 INSERT INTO pokemon_abilities VALUES (10126, 'lycanroc-midnight', 'no-guard', 99, 3, TRUE);
 INSERT INTO pokemon_abilities VALUES (10201, 'machamp-gmax', 'no-guard', 99, 2, FALSE);
 INSERT INTO pokemon_abilities VALUES (10300, 'hawlucha-mega', 'no-guard', 99, 1, FALSE);
+INSERT INTO pokemon_abilities VALUES (10305, 'raichu-mega-y', 'no-guard', 99, 1, FALSE);
 INSERT INTO pokemon_abilities VALUES (302, 'sableye', 'stall', 100, 2, FALSE);
 INSERT INTO pokemon_abilities VALUES (52, 'meowth', 'technician', 101, 2, FALSE);
 INSERT INTO pokemon_abilities VALUES (53, 'persian', 'technician', 101, 2, FALSE);
@@ -2070,6 +2075,8 @@ INSERT INTO pokemon_abilities VALUES (753, 'fomantis', 'contrary', 126, 3, TRUE)
 INSERT INTO pokemon_abilities VALUES (754, 'lurantis', 'contrary', 126, 3, TRUE);
 INSERT INTO pokemon_abilities VALUES (905, 'enamorus-incarnate', 'contrary', 126, 3, TRUE);
 INSERT INTO pokemon_abilities VALUES (10128, 'lurantis-totem', 'contrary', 126, 3, TRUE);
+INSERT INTO pokemon_abilities VALUES (10297, 'malamar-mega', 'contrary', 126, 1, FALSE);
+INSERT INTO pokemon_abilities VALUES (10308, 'staraptor-mega', 'contrary', 126, 1, FALSE);
 INSERT INTO pokemon_abilities VALUES (23, 'ekans', 'unnerve', 127, 3, TRUE);
 INSERT INTO pokemon_abilities VALUES (24, 'arbok', 'unnerve', 127, 3, TRUE);
 INSERT INTO pokemon_abilities VALUES (52, 'meowth', 'unnerve', 127, 3, TRUE);
@@ -2114,6 +2121,7 @@ INSERT INTO pokemon_abilities VALUES (979, 'annihilape', 'defiant', 128, 3, TRUE
 INSERT INTO pokemon_abilities VALUES (983, 'kingambit', 'defiant', 128, 1, FALSE);
 INSERT INTO pokemon_abilities VALUES (1017, 'ogerpon', 'defiant', 128, 1, FALSE);
 INSERT INTO pokemon_abilities VALUES (10170, 'zapdos-galar', 'defiant', 128, 1, FALSE);
+INSERT INTO pokemon_abilities VALUES (10303, 'falinks-mega', 'defiant', 128, 1, FALSE);
 INSERT INTO pokemon_abilities VALUES (566, 'archen', 'defeatist', 129, 1, FALSE);
 INSERT INTO pokemon_abilities VALUES (567, 'archeops', 'defeatist', 129, 1, FALSE);
 INSERT INTO pokemon_abilities VALUES (94, 'gengar', 'cursed-body', 130, 1, FALSE);
@@ -2252,6 +2260,8 @@ INSERT INTO pokemon_abilities VALUES (204, 'pineco', 'overcoat', 142, 3, TRUE);
 INSERT INTO pokemon_abilities VALUES (205, 'forretress', 'overcoat', 142, 3, TRUE);
 INSERT INTO pokemon_abilities VALUES (372, 'shelgon', 'overcoat', 142, 3, TRUE);
 INSERT INTO pokemon_abilities VALUES (412, 'burmy', 'overcoat', 142, 3, TRUE);
+INSERT INTO pokemon_abilities VALUES (9999, 'burmy-trash', 'overcoat', 142, 3, TRUE);
+INSERT INTO pokemon_abilities VALUES (9998, 'burmy-sandy', 'overcoat', 142, 3, TRUE);
 INSERT INTO pokemon_abilities VALUES (413, 'wormadam-plant', 'overcoat', 142, 3, TRUE);
 INSERT INTO pokemon_abilities VALUES (540, 'sewaddle', 'overcoat', 142, 3, TRUE);
 INSERT INTO pokemon_abilities VALUES (541, 'swadloon', 'overcoat', 142, 3, TRUE);
@@ -2310,6 +2320,7 @@ INSERT INTO pokemon_abilities VALUES (10019, 'tornadus-therian', 'regenerator', 
 INSERT INTO pokemon_abilities VALUES (10164, 'slowpoke-galar', 'regenerator', 144, 3, TRUE);
 INSERT INTO pokemon_abilities VALUES (10165, 'slowbro-galar', 'regenerator', 144, 3, TRUE);
 INSERT INTO pokemon_abilities VALUES (10172, 'slowking-galar', 'regenerator', 144, 3, TRUE);
+INSERT INTO pokemon_abilities VALUES (10299, 'dragalge-mega', 'regenerator', 144, 1, FALSE);
 INSERT INTO pokemon_abilities VALUES (16, 'pidgey', 'big-pecks', 145, 3, TRUE);
 INSERT INTO pokemon_abilities VALUES (17, 'pidgeotto', 'big-pecks', 145, 3, TRUE);
 INSERT INTO pokemon_abilities VALUES (18, 'pidgeot', 'big-pecks', 145, 3, TRUE);
@@ -2629,6 +2640,7 @@ INSERT INTO pokemon_abilities VALUES (10042, 'aerodactyl-mega', 'tough-claws', 1
 INSERT INTO pokemon_abilities VALUES (10076, 'metagross-mega', 'tough-claws', 181, 1, FALSE);
 INSERT INTO pokemon_abilities VALUES (10152, 'lycanroc-dusk', 'tough-claws', 181, 1, FALSE);
 INSERT INTO pokemon_abilities VALUES (10161, 'meowth-galar', 'tough-claws', 181, 2, FALSE);
+INSERT INTO pokemon_abilities VALUES (10298, 'barbaracle-mega', 'tough-claws', 181, 1, FALSE);
 INSERT INTO pokemon_abilities VALUES (700, 'sylveon', 'pixilate', 182, 3, TRUE);
 INSERT INTO pokemon_abilities VALUES (10051, 'gardevoir-mega', 'pixilate', 182, 1, FALSE);
 INSERT INTO pokemon_abilities VALUES (10067, 'altaria-mega', 'pixilate', 182, 1, FALSE);
@@ -2760,6 +2772,7 @@ INSERT INTO pokemon_abilities VALUES (806, 'blacephalon', 'beast-boost', 224, 1,
 INSERT INTO pokemon_abilities VALUES (773, 'silvally', 'rks-system', 225, 1, FALSE);
 INSERT INTO pokemon_abilities VALUES (785, 'tapu-koko', 'electric-surge', 226, 1, FALSE);
 INSERT INTO pokemon_abilities VALUES (871, 'pincurchin', 'electric-surge', 226, 3, TRUE);
+INSERT INTO pokemon_abilities VALUES (10304, 'raichu-mega-x', 'electric-surge', 226, 1, FALSE);
 INSERT INTO pokemon_abilities VALUES (786, 'tapu-lele', 'psychic-surge', 227, 1, FALSE);
 INSERT INTO pokemon_abilities VALUES (876, 'indeedee-male', 'psychic-surge', 227, 3, TRUE);
 INSERT INTO pokemon_abilities VALUES (10186, 'indeedee-female', 'psychic-surge', 227, 3, TRUE);
@@ -2940,3 +2953,5 @@ INSERT INTO pokemon_abilities VALUES (10287, 'excadrill-mega', 'piercing-drill',
 INSERT INTO pokemon_abilities VALUES (10283, 'feraligatr-mega', 'dragonize', 309, 1, FALSE);
 INSERT INTO pokemon_abilities VALUES (10282, 'meganium-mega', 'mega-sol', 310, 1, FALSE);
 INSERT INTO pokemon_abilities VALUES (10320, 'scovillain-mega', 'spicy-spray', 311, 1, FALSE);
+INSERT INTO pokemon_abilities VALUES (10290, 'eelektross-mega', 'eelevate', 312, 1, FALSE);
+INSERT INTO pokemon_abilities VALUES (10295, 'pyroar-mega', 'fire-mane', 313, 1, FALSE);
