@@ -500,6 +500,8 @@ INSERT INTO pokemon_evolutions VALUES ('wormadam-plant', 413, 413, 'burmy', 412,
 INSERT INTO pokemon_evolutions VALUES ('wormadam-sandy', 10004, 413, 'burmy-sandy', 9998, 412, 'level-up | level=20 | gender=1 | location=caves', 2, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('wormadam-trash', 10005, 413, 'burmy-trash', 9999, 412, 'level-up | level=20 | gender=1 | location=buildings', 2, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('mothim', 414, 414, 'burmy', 412, 412, 'level-up | level=20 | gender=2', 2, TRUE);
+INSERT INTO pokemon_evolutions VALUES ('mothim', 9996, 414, 'burmy-sandy', 9998, 412, 'level-up | level=20 | gender=2', 2, TRUE);
+INSERT INTO pokemon_evolutions VALUES ('mothim', 9997, 414, 'burmy-trash', 9999, 412, 'level-up | level=20 | gender=2', 2, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('combee', 415, 415, NULL, NULL, NULL, '', 1, FALSE);
 INSERT INTO pokemon_evolutions VALUES ('vespiquen', 416, 416, 'combee', 415, 415, 'level-up | level=21 | gender=1', 2, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('pachirisu', 417, 417, NULL, NULL, NULL, '', 1, TRUE);
@@ -757,7 +759,6 @@ INSERT INTO pokemon_evolutions VALUES ('meowstic-female', 10025, 678, 'espurr', 
 INSERT INTO pokemon_evolutions VALUES ('honedge', 679, 679, NULL, NULL, NULL, '', 1, FALSE);
 INSERT INTO pokemon_evolutions VALUES ('doublade', 680, 680, 'honedge', 679, 679, 'level-up | level=35', 2, FALSE);
 INSERT INTO pokemon_evolutions VALUES ('aegislash-shield', 681, 681, 'doublade', 680, 680, 'use-item | item=dusk-stone', 3, TRUE);
-INSERT INTO pokemon_evolutions VALUES ('aegislash-blade', 10026, 681, 'doublade', 680, 680, 'use-item | item=dusk-stone', 3, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('spritzee', 682, 682, NULL, NULL, NULL, '', 1, FALSE);
 INSERT INTO pokemon_evolutions VALUES ('aromatisse', 683, 683, 'spritzee', 682, 682, 'trade | held_item=sachet', 2, TRUE);
 INSERT INTO pokemon_evolutions VALUES ('swirlix', 684, 684, NULL, NULL, NULL, '', 1, FALSE);

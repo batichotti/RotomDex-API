@@ -284,6 +284,11 @@ def save_sql(rows: list[EvolutionRow], filename: str = "007_pokemon_evolutions.s
         f.write("\n")
         f.write("\n".join(rows_to_insert_sql(rows)))
         f.write("\n")
+        
+    f.write("""
+            INSERT INTO pokemon_evolutions VALUES ('mothim', 9996, 414, 'burmy-sandy', 9998, 412, 'level-up | level=20 | gender=2', 2, TRUE);
+            INSERT INTO pokemon_evolutions VALUES ('mothim', 9997, 414, 'burmy-trash', 9999, 412, 'level-up | level=20 | gender=2', 2, TRUE);
+            """)
 
     print(f"\nSQL salvo em: {filepath}")
 
