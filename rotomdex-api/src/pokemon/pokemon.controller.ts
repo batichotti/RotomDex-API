@@ -22,7 +22,7 @@ export class PokemonController {
         const asNumber = Number(identifier);
 
         if (!isNaN(asNumber)) {
-            if (asNumber < 1 || asNumber > 1025) {
+            if (asNumber < 1 || asNumber > 15000) {
                 throw new BadRequestException('Pokemon ID must be between 1 and 1025');
             }
             return this.pokemonService.findByDex(asNumber);

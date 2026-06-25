@@ -165,6 +165,12 @@ CREATE TABLE pokemon (
         f.write("\n")
         f.write("\n".join(insert_statements))
         f.write("\n")
+        
+    # Append to fix missing forms
+    f.write("""
+            INSERT INTO pokemon VALUES (9998, 'burmy-sandy', 412, 'burmy', 'generation-iv', FALSE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, 'bug', 'None', 'bug', 'None', 40, 29, 45, 29, 45, 36, 224, 20, 3.4, 45);\n
+            INSERT INTO pokemon VALUES (9999, 'burmy-trash', 412, 'burmy', 'generation-iv', FALSE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, 'bug', 'None', 'bug', 'None', 40, 29, 45, 29, 45, 36, 224, 20, 3.4, 45);\n
+            """)
 
     print(f"\nSQL salvo em: {filepath}")
 

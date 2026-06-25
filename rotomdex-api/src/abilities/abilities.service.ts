@@ -12,7 +12,6 @@ export class AbilitiesService {
       private abilitiesRepository: Repository<Abilities>,
     ) {}
 
-
   findAll() {
     return this.abilitiesRepository.find();
   }

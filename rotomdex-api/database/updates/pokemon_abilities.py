@@ -80,7 +80,7 @@ def format_sql_value(value):
     return str(value)
 
 
-def save_sql(rows, filename="006_pokemon_abilities.sql"):
+def save_sql(rows, filename="008_pokemon_abilities.sql"):
     script_dir = os.path.dirname(os.path.abspath(__file__))
     migrations_dir = os.path.abspath(os.path.join(script_dir, "..", "migrations"))
     filepath = os.path.join(migrations_dir, filename)
@@ -114,9 +114,17 @@ CREATE TABLE pokemon_abilities (
         f.write("\n")
         f.write("\n".join(insert_statements))
         f.write("\n")
+        
+    f.write(
+    """
+        INSERT INTO pokemon_abilities VALUES (9999, 'burmy-trash', 'shed-skin', 61, 1, FALSE);
+        INSERT INTO pokemon_abilities VALUES (9998, 'burmy-sandy', 'shed-skin', 61, 1, FALSE);
+        INSERT INTO pokemon_abilities VALUES (9999, 'burmy-trash', 'overcoat', 142, 3, TRUE);
+        INSERT INTO pokemon_abilities VALUES (9998, 'burmy-sandy', 'overcoat', 142, 3, TRUE);
+    """
+    )
 
     print(f"\nSQL salvo em: {filepath}")
-
 
 if __name__ == "__main__":
     rows = build_rows()
