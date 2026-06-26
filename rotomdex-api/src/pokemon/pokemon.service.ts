@@ -9,7 +9,7 @@ export class PokemonService {
   constructor(
     @InjectRepository(Pokemon)
     private pokemonRepository: Repository<Pokemon>,
-  ) {}
+  ) { }
 
   findAll() {
     return this.pokemonRepository.find({ order: { id: 'ASC' } });
@@ -23,11 +23,15 @@ export class PokemonService {
   }
 
   findByName(name: string) {
-    name = name.replace(/ /g, '-');
-    return this.pokemonRepository.find({
-      where: { name: ILike(`%${name}%`) },
-      order: { id: 'ASC' },
-    });
+    const normalised = name.replace(/ /g, '-');
+
+    return this.pokemonRepository
+      .createQueryBuilder('pokemon')
+      .where('pokemon.name ILIKE :pattern', { pattern: `%${normalised}%` })
+      .orderBy('CASE WHEN pokemon.name ILIKE :exact THEN 0 ELSE 1 END', 'ASC')
+      .addOrderBy('pokemon.id', 'ASC')
+      .setParameters({ exact: normalised })
+      .getMany();
   }
 
   findFiltered(query: PokemonQueryDto) {
@@ -146,11 +150,15 @@ export class PokemonService {
   }
 
   async findBySpeciesName(name: string) {
-    name = name.replace(/ /g, '-');
+    const normalised = name.replace(/ /g, '-');
 
-    const matched = await this.pokemonRepository.findOne({
-      where: { name: ILike(`%${name}%`) },
-    });
+    const matched = await this.pokemonRepository
+      .createQueryBuilder('pokemon')
+      .where('pokemon.name ILIKE :pattern', { pattern: `%${normalised}%` })
+      .orderBy('CASE WHEN pokemon.name ILIKE :exact THEN 0 ELSE 1 END', 'ASC')
+      .addOrderBy('pokemon.id', 'ASC')
+      .setParameters({ exact: normalised })
+      .getOne();
 
     if (!matched) return null;
 
